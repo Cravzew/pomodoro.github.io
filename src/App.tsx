@@ -1,15 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import {clearInterval} from "timers";
 
 function App() {
     const [time, setTime] = useState(2 * 60)
     const [mount, setMount] = useState(false)
 
-    function getPadTime(time: number): string {
+    function getPadTime(time: number) {
         return time.toString().padStart(2, '0')
     }
 
     const minutes = getPadTime(Math.floor(time / 60))
     const seconds = getPadTime(time - Number(minutes) * 60)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (mount) {
+                setTime((time) => (time >= 1 ? time - 1 : 0))
+            }
+        }, 1000)
+        return () => {
+            clearInterval(interval)
+        }
+    }, [mount])
 
     function handleStart() {
 
@@ -50,7 +62,7 @@ function App() {
                     <button className="ml-1 border-solid border-2 border-sky-500">Добавить</button>
                 </div>
                 <ul className="border-solid border-2 border-sky-500 mt-3">
-                    <li>Задача</li>
+                    <li className="p-3">Задача</li>
                 </ul>
             </div>
         </div>
