@@ -9,6 +9,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #000011;
+  color: aliceblue;
+}
+
+input {
+  background-color: #000031;
 }
 
 code {
