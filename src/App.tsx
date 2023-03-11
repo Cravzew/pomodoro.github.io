@@ -29,24 +29,27 @@ function App() {
     const workState = state === 'work' || state === 'break' || state === 'long-break'
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            if (workState) {
-                setTime((time) => (time >= 1 ? time - 1 : 0))
+            const interval = setInterval(() => {
+                if (workState) {
+                    setTime((time) => (time >= 1 ? time - 1 : 0))
+                }
+            }, 1000)
+            if (time === 0) {
+                if (tomato % 4 === 0) {
+                    breakState('long-break', initialLongBreak)
+                } else {
+                    if (state === 'long-break') {
+                        breakState('work', initialTime)
+                    } else {
+                        breakState('break', initialBreak)
+                    }
+                }
             }
-        }, 1000)
-        if (time === 0) {
-            if (tomato % 4 === 0) {
-                breakState('long-break', initialLongBreak)
-            } else if (tomato % 2 === 0) {
-                breakState('break', initialBreak)
-            } else {
-                breakState('work', initialTime)
+            return () => {
+                clearInterval(interval)
             }
-        }
-        return () => {
-            clearInterval(interval)
-        }
-    }, [time, state, tomato, workState])
+        }, [time, state, tomato, workState]
+    )
 
     function breakState(name: string, initial: number) {
         setState(name)
@@ -55,11 +58,13 @@ function App() {
             setTomato(tomato + 1)
         }
         if (state === name) {
-            return () => {
-                if (time === 0) setTime(initial)
-                setState(name)
-            }
+            return handleStart()
         }
+    }
+
+    function handleStart() {
+        if (time === 0) setTime(initialTime)
+        setState('work')
     }
 
     function handlePause() {
@@ -126,9 +131,9 @@ function App() {
                     :
                     <button className="p-3 mr-5 border-solid border-2 border-green-500"
                             onClick={() =>
-                                (tomato % 1 === 0 ? breakState('work', initialTime) : undefined) ||
-                                (tomato % 2 === 0 ? breakState('break', initialBreak) : undefined) ||
-                                (tomato % 4 === 0 ? breakState('long-break', initialLongBreak) : undefined)
+                                (tomato % 1 === 0 ? breakState('work', initialTime) : handleStart) ||
+                                (tomato % 2 === 0 ? breakState('break', initialBreak) : handleStart) ||
+                                (tomato % 4 === 0 ? breakState('long-break', initialLongBreak) : handleStart)
                             }>Продолжить</button>)
 
                 }
