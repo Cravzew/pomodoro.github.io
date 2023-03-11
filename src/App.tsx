@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 interface ITaskProps {
     id: string,
@@ -10,9 +10,9 @@ function App() {
         return time.toString().padStart(2, '0')
     }
 
-    const initialTime = 4
-    const initialBreak = 5
-    const initialLongBreak = 6
+    const initialTime = 3
+    const initialBreak = 3
+    const initialLongBreak = 3
 
     const [time, setTime] = useState(initialTime)
     const [tomato, setTomato] = useState(1)
@@ -35,25 +35,18 @@ function App() {
             }
         }, 1000)
         if (time === 0) {
-            if (tomato % 3 === 0) {
+            if (tomato % 4 === 0) {
                 breakState('long-break', initialLongBreak)
+            } else if (tomato % 2 === 0) {
+                breakState('break', initialBreak)
             } else {
-                if (state === 'long-break') {
-                    breakState('work', initialTime)
-                } else {
-                    breakState('break', initialBreak)
-                }
+                breakState('work', initialTime)
             }
         }
         return () => {
             clearInterval(interval)
         }
-    }, [time, state])
-
-    function handleStart() {
-        if (time === 0) setTime(initialTime)
-        setState('work')
-    }
+    }, [time, state, tomato, workState])
 
     function breakState(name: string, initial: number) {
         setState(name)
@@ -62,7 +55,10 @@ function App() {
             setTomato(tomato + 1)
         }
         if (state === name) {
-            return handleStart()
+            return () => {
+                if (time === 0) setTime(initial)
+                setState(name)
+            }
         }
     }
 
@@ -106,9 +102,9 @@ function App() {
                 <span className="p-3 border-solid border-2 border-sky-500">Состояние {state}</span>
             </div>
             <div
-                className={`mb-10 p-10 flex justify-center container mx-auto border-solid border-2 ${state == 'null' && 'border-sky-500'} ${state == 'work' && 'border-red-500'} ${state == 'pause' && 'border-red-500'} ${(state == 'break' || state == 'long-break') && 'border-green-500'}`}>
+                className={`mb-10 p-10 flex justify-center container mx-auto border-solid border-2 ${state === 'null' && 'border-sky-500'} ${state === 'work' && 'border-red-500'} ${state === 'pause' && 'border-red-500'} ${(state === 'break' || state === 'long-break') && 'border-green-500'}`}>
                 <span
-                    className={`text-6xl font-bold ${state == 'null' && 'text-white-500'} ${state == 'pause' && 'text-red-500'} ${(state == 'break' || state == 'long-break') && 'text-green-500'}`}>
+                    className={`text-6xl font-bold ${state === 'null' && 'text-white-500'} ${state === 'pause' && 'text-red-500'} ${(state === 'break' || state === 'long-break') && 'text-green-500'}`}>
                     {minutes}:{seconds}
                 </span>
                 <button className="ml-5 p-3 border-solid border-2 border-sky-500"
@@ -119,8 +115,8 @@ function App() {
                 {state === 'null' &&
                     <button
                         className="p-3 mr-5 border-solid border-2 border-green-500"
-                        onClick={handleStart}
-                    >
+                        onClick={() => breakState('work', initialTime)
+                        }>
                         Старт
                     </button>
                 }
@@ -129,7 +125,11 @@ function App() {
                             onClick={handlePause}>Пауза</button>
                     :
                     <button className="p-3 mr-5 border-solid border-2 border-green-500"
-                            onClick={() => breakState('work', initialTime)}>Продолжить</button>)
+                            onClick={() =>
+                                (tomato % 1 === 0 ? breakState('work', initialTime) : undefined) ||
+                                (tomato % 2 === 0 ? breakState('break', initialBreak) : undefined) ||
+                                (tomato % 4 === 0 ? breakState('long-break', initialLongBreak) : undefined)
+                            }>Продолжить</button>)
 
                 }
                 {state === 'null' &&
@@ -146,7 +146,7 @@ function App() {
                                         onClick={() => setTime(0)}>Пропустить</button>
                                 :
                                 <button className="p-3 mr-5 border-solid border-2 border-red-500"
-                                        onClick={() => breakState('work', initialTime)}>Сделано</button>
+                                        onClick={() => setTime(0)}>Сделано</button>
                         )
                 )}
             </div>
