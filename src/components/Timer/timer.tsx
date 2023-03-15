@@ -8,6 +8,7 @@ function Timer() {
     const [time, setTime] = useState(initialTime)
     const [tomato, setTomato] = useState(1)
     const [mount, setMount] = useState(1)
+    const [pauseCount, setPauseCount] = useState(1)
     const [state, setState] = useState('null') //  null / pause / work / break / long-break /
 
     const todo = useAppSelector(state => state.todos.list)
@@ -16,6 +17,43 @@ function Timer() {
     const seconds = getPadTime(time - Number(minutes) * 60)
 
     const workState = state === 'work' || state === 'break' || state === 'long-break'
+
+    function stateWork(): void {
+        setState('work')
+        setMount(mount + 1)
+        if (time === 0) {
+            setTime(initialTime)
+            setTomato(tomato + 1)
+            setPauseCount(pauseCount + 1)
+        }
+        if (mount % 4 === 0) {
+            return stateBreak('long-break', initialLongBreak)
+        }
+        if (state === 'work') {
+            return stateBreak('break', initialBreak)
+        }
+    }
+
+    function stateBreak(name: string, initial: number): void {
+        setState(name)
+        setMount(mount + 1)
+        if (time === 0) {
+            setTime(initial)
+            setTomato(tomato)
+            setPauseCount(pauseCount + 1)
+        }
+        if (state === name) {
+            return stateWork()
+        }
+    }
+
+    function handleReset() {
+        setTime(initialTime)
+        setTomato(1)
+        setState('null')
+        setMount(1)
+        setPauseCount(1)
+    }
 
     useEffect(() => {
             const interval = setInterval(() => {
@@ -32,40 +70,6 @@ function Timer() {
         }, [time, state, tomato, workState]
     )
 
-    function stateWork(): void {
-        setState('work')
-        setMount(mount + 1)
-        if (time === 0) {
-            setTime(initialTime)
-            setTomato(tomato + 1)
-        }
-        if (mount % 4 === 0) {
-            return stateBreak('long-break', initialLongBreak)
-        }
-        if (state === 'work') {
-            return stateBreak('break', initialBreak)
-        }
-    }
-
-    function stateBreak(name: string, initial: number): void {
-        setState(name)
-        setMount(mount + 1)
-        if (time === 0) {
-            setTime(initial)
-            setTomato(tomato)
-        }
-        if (state === name) {
-            return stateWork()
-        }
-    }
-
-    function handleReset() {
-        setTime(initialTime)
-        setTomato(1)
-        setState('null')
-        setMount(1)
-    }
-
     return (
         <div>
             <div className="mb-10 p-10 flex justify-center container mx-auto border-solid border-2 border-sky-500">
@@ -76,12 +80,13 @@ function Timer() {
                 }
                 <span className="p-3 mr-5 border-solid border-2 border-sky-500">Помидоров {tomato}</span>
                 <span className="p-3 mr-5 border-solid border-2 border-sky-500">Вызов {mount}</span>
+                <span className="p-3 mr-5 border-solid border-2 border-sky-500">Счётчик пауз {pauseCount}</span>
                 <span className="p-3 border-solid border-2 border-sky-500">Состояние {state}</span>
             </div>
             <div
-                className={`mb-10 p-10 flex justify-center container mx-auto border-solid border-2 ${state === 'null' && 'border-sky-500'} ${state === 'work' && 'border-red-500'} ${state === 'pause' && 'border-red-500'} ${(state === 'break' || state === 'long-break') && 'border-green-500'}`}>
+                className={`mb-10 p-10 flex justify-center container mx-auto border-solid border-2 ${state === 'null' && 'border-sky-500'} ${state === 'work' && 'border-red-500'} ${(pauseCount % 4 === 0 || pauseCount % 2 === 0) ? 'border-green-500' : 'border-red-500'} ${(state === 'break' || state === 'long-break') && 'border-green-500'}`}>
                 <span
-                    className={`text-6xl font-bold ${state === 'null' && 'text-white-500'} ${state === 'pause' && 'text-red-500'} ${(state === 'break' || state === 'long-break') && 'text-green-500'}`}>
+                    className={`text-6xl font-bold  ${(state === 'null' || state === 'pause') && 'text-white-500'} ${state === 'work' && 'text-red-500'} ${(state === 'break' || state === 'long-break') && 'text-green-500'}`}>
                     {minutes}:{seconds}
                 </span>
                 <button className="ml-5 p-3 border-solid border-2 border-sky-500"
@@ -102,10 +107,15 @@ function Timer() {
                     :
                     <button className="p-3 mr-5 border-solid border-2 border-green-500"
                             onClick={() => {
-                                (mount % 1 === 0 && setState('work')) ||
-                                (mount % 2 === 0 && setState('break')) ||
-                                (mount % 4 === 0 && setState('long-break'))
-                            }}>Продолжить</button>)
+                                if (pauseCount % 4 === 0) {
+                                    setState('long-break')
+                                } else if (pauseCount % 2 === 0) {
+                                    setState('break')
+                                } else {
+                                    setState('work')
+                                }
+                            }
+                            }>Продолжить</button>)
 
                 }
                 {state === 'null' &&
@@ -122,7 +132,10 @@ function Timer() {
                                         onClick={() => setTime(0)}>Пропустить</button>
                                 :
                                 <button className="p-3 mr-5 border-solid border-2 border-red-500"
-                                        onClick={handleReset}>Сделано</button>
+                                        onClick={() => {
+                                            handleReset()
+                                            alert('Задача сделана')
+                                        }}>Сделано</button>
                         )
                 )}
             </div>
