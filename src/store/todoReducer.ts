@@ -1,22 +1,12 @@
 import {ITaskProps} from "../App";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {generateRandomIndex} from "../utils/generateRandomIndex";
 
 type TodoState = {
     list: ITaskProps[]
 }
 
 const initialState: TodoState = {
-    list: [
-        {
-            id: Math.random().toString(36).substring(2, 9),
-            task: 'Сделать помодоро'
-        },
-        {
-            id: Math.random().toString(36).substring(2, 9),
-            task: 'Доделать таймер'
-        },
-    ]
+    list: [],
 }
 
 export const todoSlice = createSlice({
@@ -25,16 +15,35 @@ export const todoSlice = createSlice({
     reducers: {
         addTodo(state, action: PayloadAction<string>) {
             state.list.push({
-                id: generateRandomIndex,
-                task: action.payload
+                id: Math.random().toString(36).substring(2, 9),
+                task: action.payload,
+                tomato: 1
             })
         },
+        incTomato(state, action: PayloadAction<string>) {
+            state.list = state.list.map((todo) => todo.id === action.payload ? {
+                ...todo,
+                tomato: todo.tomato += 1
+            } : todo)
+        },
+        decTomato(state, action: PayloadAction<string>) {
+            state.list = state.list.map((todo) => todo.id === action.payload ? {
+                ...todo,
+                tomato: todo.tomato !== 1 ? todo.tomato -= 1 : todo.tomato
+            } : todo)
+        },
+        updateTask(state, action: PayloadAction<string>) {
+            state.list = state.list.map((todo) => todo.task === action.payload ? {
+                ...todo,
+                task: action.payload
+            } : todo)
+        },
         removeTodo(state, action: PayloadAction<string>) {
-            state.list = state.list.filter(todo => todo.id !== action.payload)
+            state.list = state.list.filter((todo) => todo.id !== action.payload)
         }
     }
 })
 
-export const { addTodo, removeTodo } = todoSlice.actions
+export const {addTodo, removeTodo, incTomato, decTomato, updateTask} = todoSlice.actions
 
 export default todoSlice.reducer

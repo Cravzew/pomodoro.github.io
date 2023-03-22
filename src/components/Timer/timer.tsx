@@ -17,6 +17,7 @@ function Timer() {
     const seconds = getPadTime(time - Number(minutes) * 60)
 
     const workState = state === 'work' || state === 'break' || state === 'long-break'
+    const breakState = state === 'break' || state === 'long-break'
 
     function stateWork(): void {
         setState('work')
@@ -72,73 +73,108 @@ function Timer() {
 
     return (
         <div>
-            <div className="mb-10 p-10 flex justify-center container mx-auto border-solid border-2 border-sky-500">
+            <div className="mt-10 mb-10 p-10 flex justify-center container mx-auto border-solid border-2 border-sky-500">
                 {todo.length !== 0 ?
-                    <span className="p-3 mr-5 border-solid border-2 border-sky-500">{todo[0].task}</span>
+                    <div className="flex">
+                        <span className="p-3 mr-5 border-solid border-2 border-sky-500">{todo[0].task}</span>
+                        <span
+                            className="p-3 mr-5 border-solid border-2 border-sky-500">Помидоров {todo[0].tomato}</span>
+                    </div>
                     :
                     undefined
                 }
-                <span className="p-3 mr-5 border-solid border-2 border-sky-500">Помидоров {tomato}</span>
                 <span className="p-3 mr-5 border-solid border-2 border-sky-500">Вызов {mount}</span>
                 <span className="p-3 mr-5 border-solid border-2 border-sky-500">Счётчик пауз {pauseCount}</span>
                 <span className="p-3 border-solid border-2 border-sky-500">Состояние {state}</span>
             </div>
-            <div
-                className={`mb-10 p-10 flex justify-center container mx-auto border-solid border-2 ${state === 'null' && 'border-sky-500'} ${state === 'work' && 'border-red-500'} ${(pauseCount % 4 === 0 || pauseCount % 2 === 0) ? 'border-green-500' : 'border-red-500'} ${(state === 'break' || state === 'long-break') && 'border-green-500'}`}>
+            {todo.length !== 0 ?
+                <div>
+
+                    <div
+                        className={`mb-10 p-10 flex justify-center container mx-auto border-solid border-2 ${state === 'null' && 'border-sky-500'} ${state === 'work' && 'border-red-500'} ${(pauseCount % 4 === 0 || pauseCount % 2 === 0) ? 'border-green-500' : 'border-red-500'} ${(state === 'break' || state === 'long-break') && 'border-green-500'}`}>
                 <span
                     className={`text-6xl font-bold  ${(state === 'null' || state === 'pause') && 'text-white-500'} ${state === 'work' && 'text-red-500'} ${(state === 'break' || state === 'long-break') && 'text-green-500'}`}>
                     {minutes}:{seconds}
                 </span>
-                <button className="ml-5 p-3 border-solid border-2 border-sky-500"
-                        onClick={() => setTomato(tomato + 1)}>+
-                </button>
-            </div>
-            <div className="mb-10 p-10 flex justify-center container mx-auto border-solid border-2 border-sky-500">
-                {state === 'null' &&
-                    <button
-                        className="p-3 mr-5 border-solid border-2 border-green-500"
-                        onClick={stateWork}>
-                        Старт
-                    </button>
-                }
-                {state !== 'null' && (workState ?
-                    <button className="p-3 mr-5 border-solid border-2 border-green-500"
-                            onClick={() => setState('pause')}>Пауза</button>
-                    :
-                    <button className="p-3 mr-5 border-solid border-2 border-green-500"
-                            onClick={() => {
-                                if (pauseCount % 4 === 0) {
-                                    setState('long-break')
-                                } else if (pauseCount % 2 === 0) {
-                                    setState('break')
-                                } else {
-                                    setState('work')
-                                }
-                            }
-                            }>Продолжить</button>)
-
-                }
-                {state === 'null' &&
-                    <button className={`p-3 border-solid border-2 border-gray-500`}
-                            onClick={handleReset} disabled>Стоп
-                    </button>
-                }
-                {state !== 'null' && (state === 'work' ?
-                        <button className={`p-3 border-solid border-2 border-red-500`}
-                                onClick={handleReset}>Стоп
+                        <button className="ml-5 p-3 border-solid border-2 border-sky-500"
+                                onClick={() => {
+                                    setTomato(tomato + 1)
+                                    setTime(time + 60)
+                                }}>+
                         </button>
-                        : (state === 'break' || state === 'long-break' ?
-                                <button className="p-3 mr-5 border-solid border-2 border-red-500"
-                                        onClick={() => setTime(0)}>Пропустить</button>
-                                :
-                                <button className="p-3 mr-5 border-solid border-2 border-red-500"
+                    </div>
+                    <div
+                        className="mb-10 p-10 flex justify-center container mx-auto border-solid border-2 border-sky-500">
+                        {state === 'null' &&
+                            <button
+                                className="p-3 mr-5 border-solid border-2 border-green-500"
+                                onClick={stateWork}>
+                                Старт
+                            </button>
+                        }
+                        {state !== 'null' && (workState ?
+                                <button className="p-3 mr-5 border-solid border-2 border-green-500"
                                         onClick={() => {
-                                            handleReset()
-                                            alert('Задача сделана')
-                                        }}>Сделано</button>
-                        )
-                )}
-            </div>
+                                            if (state === 'work') {
+                                                setState('pause')
+                                            } else {
+                                                setState('pause-break')
+                                            }
+                                        }}>Пауза
+                                </button>
+                                :
+                                <button className="p-3 mr-5 border-solid border-2 border-green-500"
+                                        onClick={() => {
+                                            if (pauseCount % 4 === 0) {
+                                                setState('long-break')
+                                            } else if (pauseCount % 2 === 0) {
+                                                setState('break')
+                                            } else {
+                                                setState('work')
+                                            }
+                                        }
+                                        }>Продолжить
+                                </button>
+                        )}
+                        {state === 'null' &&
+                            <button className={`p-3 border-solid border-2 border-gray-500`}
+                                    onClick={handleReset} disabled>Стоп
+                            </button>
+                        }
+                        {state !== 'null' && (state === 'work' &&
+                            <button className={`p-3 border-solid border-2 border-red-500`}
+                                    onClick={handleReset}>Стоп
+                            </button>
+                        )}
+                        {state !== 'null' && (state === 'pause' &&
+                            <button className={`p-3 border-solid border-2 border-red-500`}
+                                    onClick={() => {
+                                        handleReset()
+                                        alert('Дело сделано')
+                                    }}>Сделано
+                            </button>
+                        )}
+                        {state !== 'null' && (breakState &&
+                            <button className={`p-3 border-solid border-2 border-red-500`}
+                                    onClick={() => {
+                                        setTime(0)
+                                    }}>Пропустить
+                            </button>
+                        )}
+                        {state !== 'null' && (state === 'pause-break' &&
+                            <button className={`p-3 border-solid border-2 border-red-500`}
+                                    onClick={() => {
+                                        setTime(0)
+                                    }}>Пропустить
+                            </button>
+                        )}
+                    </div>
+                </div>
+                :
+                <div className="block text-center mb-10">
+                    Нету задачи
+                </div>
+            }
         </div>
     );
 }

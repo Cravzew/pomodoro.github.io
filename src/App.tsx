@@ -4,11 +4,14 @@ import Timer from "./components/Timer/timer";
 
 export interface ITaskProps {
     id: string,
-    task: string
+    task: string,
+    tomato: number,
+    setTodoText?: React.Dispatch<React.SetStateAction<string>>,
+    todoText?: string
 }
 
 function App() {
-    
+
     return (
         <div>
             <Timer/>

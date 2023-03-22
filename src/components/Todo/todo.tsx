@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {ITaskProps} from "../../App";
+import React, {ChangeEvent, useState} from 'react';
 import {useAppDispatch, useAppSelector} from "../../constants/hooks";
-import {addTodo, removeTodo} from "../../store/todoReducer";
-import {useSelector} from "react-redux";
+import {addTodo} from "../../store/todoReducer";
+import TodoTask from "./TodoTask/todotask";
 
 function Todo() {
     const [userInput, setUserInput] = useState('')
+
     const todo = useAppSelector(state => state.todos.list)
     const dispatch = useAppDispatch()
 
@@ -33,13 +33,8 @@ function Todo() {
             </div>
             <ul className="mt-3">
                 {todo.map((todo) =>
-                    <li className="flex justify-between p-3 border-solid border-2 border-sky-500 mb-3"
-                        key={todo.id}>
-                        {todo.task}
-                        <button onClick={() => dispatch(removeTodo(todo.id))}>
-                            X
-                        </button>
-                    </li>)}
+                    <TodoTask key={todo.id} id={todo.id} task={todo.task} tomato={todo.tomato}/>
+                )}
             </ul>
         </div>
     );
