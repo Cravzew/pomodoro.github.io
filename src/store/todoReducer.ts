@@ -33,7 +33,7 @@ export const todoSlice = createSlice({
             } : todo)
         },
         updateTask(state, action: PayloadAction<string>) {
-            state.list = state.list.map((todo) => todo.task === action.payload ? {
+            state.list = state.list.map((todo) => todo.task !== action.payload ? {
                 ...todo,
                 task: action.payload
             } : todo)

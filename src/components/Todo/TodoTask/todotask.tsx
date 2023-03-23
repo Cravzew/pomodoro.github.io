@@ -13,7 +13,13 @@ function TodoTask({id, task, tomato}: ITaskProps) {
     const [isEdit, setIsEdit] = useState(false)
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
-        dispatch(updateTask(event.target.value))
+        setText(event.target.value)
+    }
+
+    function handleBlur() {
+        if (text.length <= 3) return
+        setIsEdit(false)
+        dispatch(updateTask(text))
     }
 
     const dispatch = useAppDispatch()
@@ -33,18 +39,13 @@ function TodoTask({id, task, tomato}: ITaskProps) {
                     {isEdit ?
                         <input
                             type="text"
-                            value={task}
+                            value={text}
                             onChange={handleChange}
-                            onKeyPress={(event) => {
-                                if (task.length <= 3) return
-                                if (event.key === 'Enter') {
-                                    setIsEdit(false)
-                                    dispatch(updateTask(task))
-                                }
-                            }}/>
+                            onBlur={handleBlur}
+                        />
                         :
                         <span>
-                    {task}
+                    {text}
                     </span>
                     }
                 </form>

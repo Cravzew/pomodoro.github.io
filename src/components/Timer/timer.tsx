@@ -73,7 +73,8 @@ function Timer() {
 
     return (
         <div>
-            <div className="mt-10 mb-10 p-10 flex justify-center container mx-auto border-solid border-2 border-sky-500">
+            <div
+                className="mt-10 mb-10 p-10 flex justify-center container mx-auto border-solid border-2 border-sky-500">
                 {todo.length !== 0 ?
                     <div className="flex">
                         <span className="p-3 mr-5 border-solid border-2 border-sky-500">{todo[0].task}</span>
