@@ -1,27 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import {Provider} from "react-redux";
-import {store} from "./store/store";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {createRoot} from 'react-dom/client';
+import "./index.scss"
+import App from "./App";
 
-const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <App/>
-    },
-    {
-        path: '/stats',
-        element: <div>Stats</div>
-    }
-])
+document.body.innerHTML = '<div id="app"></div>';
 
-const root = ReactDOM.createRoot(
-    document.getElementById('root') as HTMLElement
-);
-root.render(
-    <Provider store={store}>
-        <RouterProvider router={router}/>
-    </Provider>
-);
+const root = createRoot(document.getElementById('app'));
+root.render(<App/>);
