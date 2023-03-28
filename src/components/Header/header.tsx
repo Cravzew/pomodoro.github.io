@@ -15,7 +15,11 @@ function Header() {
                     </span>
                 </Link>
                 <nav>
-                    <Theme/>
+                    <ul>
+                        <li>
+                            <Theme/>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </header>

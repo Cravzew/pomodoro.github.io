@@ -1,0 +1,11 @@
+@import "src/styles/_index.scss";
+
+.button {
+  &__container {
+    @include flexAlign;
+
+    @include headerItem;
+
+  }
+
+}

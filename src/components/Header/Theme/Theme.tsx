@@ -1,8 +1,10 @@
 import React from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import styles from './index.module.scss'
+import {useDispatch} from 'react-redux'
 import {set} from "../../../store/themeReducer";
 import {useAppSelector} from "../../../store/store";
+import SunSvg from "./SunSvg";
+import MoonSvg from "./MoonSvg";
+import {buttonContainer} from './theme.scss'
 
 const Theme = () => {
     const theme = useAppSelector(state => state.theme)
@@ -19,11 +21,25 @@ const Theme = () => {
     }
 
     return (
-        <div
+        <button
             onClick={handleChange}
         >
-            adsdsa
-        </div>
+            {theme === 'light' ?
+                <div className={buttonContainer}>
+                    <SunSvg/>
+                    <span>
+                    Светлая тема
+                    </span>
+                </div>
+                :
+                <div className={buttonContainer}>
+                    <MoonSvg/>
+                    <span>
+                    Тёмная тема
+                    </span>
+                </div>
+            }
+        </button>
     )
 }
 

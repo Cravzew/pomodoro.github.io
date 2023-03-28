@@ -5,6 +5,7 @@ import App from "./App";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
 
 document.body.innerHTML = '<div id="app"></div>';
 
@@ -13,8 +14,9 @@ const root = createRoot(document.getElementById('app'));
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App/>
-    }
+        element: <App/>,
+        errorElement: <ErrorPage/>
+    },
 ])
 
 root.render(

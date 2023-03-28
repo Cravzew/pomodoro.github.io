@@ -1,17 +1,8 @@
-@mixin makeContainer($padUpDown, $padLeftRight) {
-  margin: 0 auto;
-  padding: $padUpDown $padLeftRight;
-  max-width: 1440px;
-}
-
-@mixin flexAlign {
-  display: flex;
-  align-items: center;
-}
+@import "../../styles/_index.scss";
 
 .header {
   background-color: var(--background-color);
-  box-shadow: 0px 10px 63px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--box-shadow-header);
 
   &__container {
     @include makeContainer(15px, 80px);
@@ -20,9 +11,11 @@
 
     &--link {
       @include flexAlign;
+
       svg {
         margin-right: 5px;
       }
+
       span {
         font-weight: 300;
         font-size: 24px;

@@ -1,0 +1,36 @@
+@mixin makeContainer($padUpDown, $padLeftRight) {
+  margin: 0 auto;
+  padding: $padUpDown $padLeftRight;
+  max-width: 1440px;
+}
+
+@mixin flexAlign {
+  display: flex;
+  align-items: center;
+}
+
+@mixin headerItem() {
+  span {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: var(--header-text);
+  }
+
+  svg {
+    fill: var(--header-text);
+    margin-right: 10px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    span {
+      color: var(--header-hover);
+    }
+
+    svg {
+      fill: var(--header-hover);
+    }
+
+  }
+}
