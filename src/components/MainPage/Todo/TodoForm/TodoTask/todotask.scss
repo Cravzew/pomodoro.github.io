@@ -1,0 +1,31 @@
+@import "src/styles/_index.scss";
+
+.tasks {
+  &__item {
+    @include flexAlign;
+    justify-content: space-between;
+
+    padding: 15px 0;
+
+    &__content {
+      @include flexAlign;
+
+      &--tomato {
+        border: 1px solid var(--line-todo);
+        border-radius: 50%;
+        margin-right: 5px;
+        padding: 4px 10px;
+        color: var(--text-default);
+      }
+
+      &--text {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 17px;
+        background-color: transparent;
+        padding: 4px 5px;
+        color: var(--text-default);
+      }
+    }
+  }
+}

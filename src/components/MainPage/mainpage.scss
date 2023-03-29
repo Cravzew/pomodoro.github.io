@@ -1,0 +1,10 @@
+@import "src/styles/_index.scss";
+
+.main {
+  @include makeContainer(100px, 80px);
+  padding-bottom: 0;
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+}

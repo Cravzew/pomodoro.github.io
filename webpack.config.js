@@ -55,6 +55,7 @@ module.exports = {
             favicon: "./src/images/favicon.png"
         })
     ],
+    devtool: 'inline-source-map',
     devServer: {
         static: './dist'
     },

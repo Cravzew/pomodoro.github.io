@@ -1,11 +1,12 @@
 import {configureStore} from '@reduxjs/toolkit'
 import themeReducer from "./themeReducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
-// ...
+import todoReducer from "./todoReducer";
 
 export const store = configureStore({
     reducer: {
         theme: themeReducer,
+        todo: todoReducer
     }
 })
 

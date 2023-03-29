@@ -1,14 +1,13 @@
 import React from 'react'
-import {useDispatch} from 'react-redux'
 import {set} from "../../../store/themeReducer";
-import {useAppSelector} from "../../../store/store";
+import {useAppDispatch, useAppSelector} from "../../../store/store";
 import SunSvg from "./SunSvg";
 import MoonSvg from "./MoonSvg";
 import {buttonContainer} from './theme.scss'
 
 const Theme = () => {
     const theme = useAppSelector(state => state.theme)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     React.useEffect(() => {
         document.documentElement.dataset.theme = theme

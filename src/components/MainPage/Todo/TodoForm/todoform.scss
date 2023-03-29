@@ -1,0 +1,54 @@
+@import "src/styles/_index.scss";
+
+.todo {
+  &__form {
+    max-width: 370px;
+    margin-bottom: 25px;
+
+    &--input {
+      width: 370px;
+      display: block;
+      border: none;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 17px;
+      background-color: var(--background-form);
+      padding: 19px 15px;
+      cursor: pointer;
+      margin-bottom: 25px;
+
+      &:focus-visible,
+      &:hover {
+        outline: 1px solid var(--header-text);
+      }
+
+      &::placeholder {
+        color: var(--placeholder-text);
+      }
+    }
+
+    &--button {
+      @include buttonApp(var(--button-green-default-bg), var(--text-button))
+    }
+  }
+}
+
+.tasks {
+  margin-top: 25px;
+  margin-bottom: 20px;
+
+  li:not(:first-child) {
+    border-bottom: 1px solid var(--line-todo);
+  }
+
+  li:not(:last-child) {
+    border-top: 1px solid var(--line-todo);
+  }
+}
+
+.todo__time {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+  color: var(--placeholder-text);
+}

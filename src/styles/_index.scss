@@ -34,3 +34,20 @@
 
   }
 }
+
+@mixin buttonApp($backgroundColor, $textColor) {
+  border: none;
+  outline: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 17px;
+  padding: 19px 50px;
+  background-color: $backgroundColor;
+  color: $textColor;
+  &:hover,
+  &:focus-visible {
+    @if $backgroundColor == var(--button-green-default-bg) {
+      background-color: var(--button-green-hover-bg);
+    }
+  }
+}
