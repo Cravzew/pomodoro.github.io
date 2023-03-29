@@ -6,10 +6,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
-
-document.body.innerHTML = '<div id="app"></div>';
-
-const root = createRoot(document.getElementById('app'));
+import ReactDOM from "react-dom/client";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +16,7 @@ const router = createBrowserRouter([
     },
 ])
 
-root.render(
+ReactDOM.createRoot(document.getElementById('app')).render(
     <Provider store={store}>
         <RouterProvider router={router}/>
     </Provider>

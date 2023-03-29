@@ -52,7 +52,8 @@ module.exports = {
         new MiniCssExtractPlugin({}),
         new HtmlWebpackPlugin({
             title: "Pomodoro-Box",
-            favicon: "./src/images/favicon.png"
+            favicon: "./src/images/favicon.png",
+            template: "./src/template/index.html"
         })
     ],
     devtool: 'inline-source-map',

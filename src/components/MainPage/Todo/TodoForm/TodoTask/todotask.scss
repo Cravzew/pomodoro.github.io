@@ -4,6 +4,8 @@
   &__item {
     @include flexAlign;
     justify-content: space-between;
+    //border-top: 1px solid var(--line-todo);
+    //border-bottom: 1px solid var(--line-todo);
 
     padding: 15px 0;
 

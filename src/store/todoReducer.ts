@@ -5,8 +5,6 @@ export interface ITaskProps {
     id: string,
     task: string,
     tomato: number,
-    setTodoText?: React.Dispatch<React.SetStateAction<string>>,
-    todoText?: string
 }
 
 type TodoState = {
