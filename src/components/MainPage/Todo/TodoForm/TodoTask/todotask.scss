@@ -4,8 +4,6 @@
   &__item {
     @include flexAlign;
     justify-content: space-between;
-    //border-top: 1px solid var(--line-todo);
-    //border-bottom: 1px solid var(--line-todo);
 
     padding: 15px 0;
 
@@ -27,6 +25,59 @@
         background-color: transparent;
         padding: 4px 5px;
         color: var(--text-default);
+      }
+
+      input {
+        background-color: var(--background-form);
+        border: none;
+        outline: none;
+        padding: 4px 5px;
+      }
+    }
+  }
+
+  &__dropdown {
+    background-color: var(--background-color);
+    border: 1px solid var(--line-dropdown);
+    padding-top: 2px;
+
+    &--item {
+      @include flexAlign;
+      padding: 10px 15px;
+      cursor: pointer;
+
+      svg {
+        margin-right: 8px;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 70px;
+        top: -18px;
+        border: 10px solid transparent;
+        border-bottom: 10px solid var(--background-color);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 70px;
+        top: -19px;
+        border: 10px solid transparent;
+        border-bottom: 10px solid var(--line-dropdown);
+      }
+
+      button {
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 17px;
+        color: var(--placeholder-text);
+      }
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--background-form);
       }
     }
   }

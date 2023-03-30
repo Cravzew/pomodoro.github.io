@@ -1,9 +1,20 @@
 import React, {ChangeEvent, useState} from 'react';
-import {tasksItem, tasksItemContent, tasksItemContentTomato, tasksItemContentText} from './todotask.scss'
+import {
+    tasksItem,
+    tasksItemContent,
+    tasksItemContentTomato,
+    tasksItemContentText,
+    tasksDropdown,
+    tasksDropdownItem
+} from './todotask.scss'
 import DotSvg from "./DotSvg";
 import {decTomato, incTomato, ITaskProps, updateTask} from "../../../../../store/todoReducer";
 import {Dropdown} from "./Dropdown/dropdown";
 import {useAppDispatch} from "../../../../../store/store";
+import IncSvg from "./Dropdown/IncSvg";
+import DecSvg from "./Dropdown/DecSvg";
+import EditSvg from "./Dropdown/EditSvg";
+import DelSvg from "./Dropdown/DelSvg";
 
 function TodoTask({id, task, tomato}: ITaskProps) {
 
@@ -47,10 +58,24 @@ function TodoTask({id, task, tomato}: ITaskProps) {
                     <DotSvg/>
                 </button>
             }>
-                <button className="mb-5 cursor-pointer" onClick={() => dispatch(incTomato(id))}>Увеличить</button>
-                <button className="mb-5 cursor-pointer" onClick={() => dispatch(decTomato(id))}>Уменьшить</button>
-                <button className="mb-5 cursor-pointer" onClick={() => setIsEdit(!isEdit)}>Редактировать</button>
-                <button className="cursor-pointer" onClick={() => setModalDelete(true)}>Удалить</button>
+                <ul className={tasksDropdown}>
+                    <li className={tasksDropdownItem}>
+                        <IncSvg/>
+                        <button onClick={() => dispatch(incTomato(id))}>Увеличить</button>
+                    </li>
+                    <li className={tasksDropdownItem}>
+                        <DecSvg/>
+                        <button onClick={() => dispatch(decTomato(id))}>Уменьшить</button>
+                    </li>
+                    <li className={tasksDropdownItem}>
+                        <EditSvg/>
+                        <button onClick={() => setIsEdit(!isEdit)}>Редактировать</button>
+                    </li>
+                    <li className={tasksDropdownItem}>
+                        <DelSvg/>
+                        <button onClick={() => setModalDelete(true)}>Удалить</button>
+                    </li>
+                </ul>
             </Dropdown>
         </li>
     );

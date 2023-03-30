@@ -52,10 +52,10 @@ export function Dropdown({button, children, isOpen, onOpen = NOOP, onClose = NOO
             </div>
             {isOpenDropDown && ReactDOM.createPortal((
                     <div
-                        className="absolute"
                         style={{
-                            top: (ref.current?.getBoundingClientRect().y || 0) + window.scrollY,
-                            left: (ref.current?.getBoundingClientRect().x || 0) + window.scrollX,
+                            position: 'absolute',
+                            top: (ref.current?.getBoundingClientRect().y || 0) + window.scrollY + 30,
+                            left: (ref.current?.getBoundingClientRect().x || 0) + window.scrollX - 67,
                         }}
                     >
                         <div className="bg-black p-3" onClick={() => setIsOpenDropdown(false)}>
