@@ -1,0 +1,79 @@
+@import "src/styles/_index.scss";
+
+.timer {
+  max-width: 730px;
+  width: 100%;
+
+  &__header {
+    @include flexAlign;
+    justify-content: space-between;
+    background-color: var(--line-dropdown);
+    padding: 20px 40px;
+
+    &--task {
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 17px;
+      color: var(--text-inverse);
+    }
+
+    &--tomato {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 17px;
+      color: var(--text-inverse);
+    }
+  }
+
+  &__body {
+    background-color: var(--background-form);
+    padding-top: 70px;
+    padding-bottom: 107px;
+    @include flexAlign;
+    flex-direction: column;
+
+    &--timer {
+      @include flexAlign;
+
+      p {
+        margin-right: 25px;
+        font-weight: 200;
+        font-size: 150px;
+        line-height: 179px;
+        color: var(--text-default);
+      }
+
+      button svg {
+        fill: var(--line-dropdown);
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+          fill: var(--button-green-hover-bg)
+        }
+      }
+    }
+
+    &--task {
+      margin-bottom: 32px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 17px;
+      color: var(--placeholder-text);
+    }
+
+    &--form {
+      display: flex;
+
+      button:first-child {
+        @include buttonApp(var(--button-green-default-bg), var(--text-button));
+        margin-right: 25px;
+      }
+
+      button:last-child {
+        @include buttonApp(transperent, var(--line-dropdown));
+        border: 2px solid var(--line-dropdown);
+      }
+    }
+  }
+}

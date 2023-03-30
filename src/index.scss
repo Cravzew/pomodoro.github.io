@@ -68,7 +68,8 @@ a {
   --button-green-hover-bg: #899441;
   --button-red-default-bg: #DC3E22;
   --line-todo: #E4E4E4;
-  --line-dropdown: #C4C4C4
+  --line-dropdown: #C4C4C4;
+  --text-inverse: #fff
 }
 
 :root[data-theme="dark"] {
@@ -85,6 +86,7 @@ a {
   --button-red-default-bg: #DC3E22;
   --line-todo: #E4E4E4;
   --line-dropdown: #C4C4C4;
+  --text-inverse: #000
 }
 
 @font-face {
