@@ -1,11 +1,12 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useRef, useState} from 'react';
 import {
     tasksItem,
     tasksItemContent,
     tasksItemContentTomato,
     tasksItemContentText,
     tasksDropdown,
-    tasksDropdownItem
+    tasksDropdownItem,
+    show
 } from './todotask.scss'
 import DotSvg from "./DotSvg";
 import {decTomato, incTomato, ITaskProps, updateTask} from "../../../../../store/todoReducer";
@@ -15,6 +16,7 @@ import IncSvg from "./Dropdown/IncSvg";
 import DecSvg from "./Dropdown/DecSvg";
 import EditSvg from "./Dropdown/EditSvg";
 import DelSvg from "./Dropdown/DelSvg";
+import ModalDelete from "../../ModalDelete/ModalDelete";
 
 function TodoTask({id, task, tomato}: ITaskProps) {
 
@@ -24,6 +26,8 @@ function TodoTask({id, task, tomato}: ITaskProps) {
     const [modalDelete, setModalDelete] = useState(false)
 
     const dispatch = useAppDispatch()
+
+    const ref = useRef<HTMLLIElement>(null)
 
     function handleChange(event: ChangeEvent<HTMLInputElement>) {
         setText(event.target.value)
@@ -35,8 +39,12 @@ function TodoTask({id, task, tomato}: ITaskProps) {
         dispatch(updateTask(text))
     }
 
+    setTimeout(() => {
+        ref.current.classList.add('show')
+    }, 10)
+
     return (
-        <li className={tasksItem} key={id}>
+        <li className={tasksItem} key={id} ref={ref}>
             <div className={tasksItemContent}>
                 <p className={tasksItemContentTomato}>
                     {tomato}
@@ -77,6 +85,9 @@ function TodoTask({id, task, tomato}: ITaskProps) {
                     </li>
                 </ul>
             </Dropdown>
+            {modalDelete &&
+                <ModalDelete id={id} setModalDelete={setModalDelete}/>
+            }
         </li>
     );
 }

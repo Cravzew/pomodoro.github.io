@@ -11,8 +11,8 @@ import {
 } from './timer.scss'
 import {initialBreak, initialLongBreak, initialTime} from "../../../constants/time";
 import {useAppSelector} from "../../../store/store";
-import {getPadTime} from "../../../utils/getPadTime";
 import IncTimeSvg from "./incTimeSvg";
+import {getPadTime} from "../../../utils/getPadTime";
 
 function Timer() {
 
@@ -24,11 +24,11 @@ function Timer() {
 
     const todo = useAppSelector(state => state.todo.list)
 
-    const minutes = getPadTime(Math.floor(time / 60))
-    const seconds = getPadTime(time - Number(minutes) * 60)
-
     const workState = state === 'work' || state === 'break' || state === 'long-break'
     const breakState = state === 'break' || state === 'long-break'
+
+    const minutes = getPadTime(Math.floor(time / 60))
+    const seconds = getPadTime(time - Number(minutes) * 60)
 
     function stateWork(): void {
         setState('work')
@@ -90,7 +90,7 @@ function Timer() {
             </div>
             <div className={timerBody}>
                 <div className={timerBodyTimer}>
-                    <p>25:00</p>
+                    <p>{minutes}:{seconds}</p>
                     <button>
                         <IncTimeSvg/>
                     </button>

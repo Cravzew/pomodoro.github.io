@@ -58,7 +58,7 @@ export function Dropdown({button, children, isOpen, onOpen = NOOP, onClose = NOO
                             left: (ref.current?.getBoundingClientRect().x || 0) + window.scrollX - 67,
                         }}
                     >
-                        <div className="bg-black p-3" onClick={() => setIsOpenDropdown(false)}>
+                        <div onClick={() => setIsOpenDropdown(false)}>
                             {children}
                         </div>
                     </div>

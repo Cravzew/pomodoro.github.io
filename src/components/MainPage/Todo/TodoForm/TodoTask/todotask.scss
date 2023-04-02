@@ -3,6 +3,9 @@
 .tasks {
   &__item {
     @include flexAlign;
+    opacity: 0;
+    transform: rotateX(-90deg);
+    transition: all 0.3s cubic-bezier(.36,-0.64,.34,1.76);
     justify-content: space-between;
 
     padding: 15px 0;
@@ -54,18 +57,18 @@
         content: '';
         position: absolute;
         left: 70px;
-        top: -18px;
+        top: -13px;
         border: 10px solid transparent;
-        border-bottom: 10px solid var(--background-color);
+        border-bottom: 5px solid var(--background-color);
       }
 
       &::before {
         content: '';
         position: absolute;
         left: 70px;
-        top: -19px;
+        top: -14px;
         border: 10px solid transparent;
-        border-bottom: 10px solid var(--line-dropdown);
+        border-bottom: 5px solid var(--line-dropdown);
       }
 
       button {
@@ -80,5 +83,11 @@
         background-color: var(--background-form);
       }
     }
+  }
+
+  .show {
+    opacity: 1;
+    transform: none;
+    transition: all 0.3s cubic-bezier(.36,-0.64,.34,1.76);
   }
 }

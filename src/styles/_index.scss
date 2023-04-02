@@ -48,6 +48,9 @@
   &:focus-visible {
     @if $backgroundColor == var(--button-green-default-bg) {
       background-color: var(--button-green-hover-bg);
+    };
+    @if $backgroundColor == var(--button-red-default-bg) {
+      background-color: var(--button-red-hover-bg);
     }
   }
 }
