@@ -7,7 +7,8 @@ import {
     timerBody,
     timerBodyTimer,
     timerBodyTask,
-    timerBodyForm
+    timerBodyForm,
+    timerEmpty
 } from './timer.scss'
 import {initialBreak, initialLongBreak, initialTime} from "../../../constants/time";
 import {useAppSelector} from "../../../store/store";
@@ -84,23 +85,31 @@ function Timer() {
 
     return (
         <section className={timer}>
-            <div className={timerHeader}>
-                <p className={timerHeaderTask}>Сверстать сайт</p>
-                <p className={timerHeaderTomato}>Помидор 1</p>
-            </div>
-            <div className={timerBody}>
-                <div className={timerBodyTimer}>
-                    <p>{minutes}:{seconds}</p>
-                    <button>
-                        <IncTimeSvg/>
-                    </button>
+            {todo.length !== 0 ?
+                <div>
+                    <div className={timerHeader}>
+                        <p className={timerHeaderTask}>{todo[0].task}</p>
+                        <p className={timerHeaderTomato}>Помидор {todo[0].tomato}</p>
+                    </div>
+                    <div className={timerBody}>
+                        <div className={timerBodyTimer}>
+                            <p>{minutes}:{seconds}</p>
+                            <button>
+                                <IncTimeSvg/>
+                            </button>
+                        </div>
+                        <p className={timerBodyTask}>{todo[0].task}</p>
+                        <div className={timerBodyForm}>
+                            <button>Старт</button>
+                            <button>Стоп</button>
+                        </div>
+                    </div>
                 </div>
-                <p className={timerBodyTask}>Сверстать сайт</p>
-                <div className={timerBodyForm}>
-                    <button>Старт</button>
-                    <button>Стоп</button>
+                :
+                <div className={timerEmpty}>
+
                 </div>
-            </div>
+            }
         </section>
     );
 }

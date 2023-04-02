@@ -6,7 +6,6 @@ import {
     tasksItemContentText,
     tasksDropdown,
     tasksDropdownItem,
-    show
 } from './todotask.scss'
 import DotSvg from "./DotSvg";
 import {decTomato, incTomato, ITaskProps, updateTask} from "../../../../../store/todoReducer";
@@ -44,7 +43,7 @@ function TodoTask({id, task, tomato}: ITaskProps) {
     }, 10)
 
     return (
-        <li className={tasksItem} key={id} ref={ref}>
+        <li className={tasksItem} key={id} id="tasksItem" ref={ref}>
             <div className={tasksItemContent}>
                 <p className={tasksItemContentTomato}>
                     {tomato}

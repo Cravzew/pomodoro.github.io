@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import ReactDOM from "react-dom";
 import {removeTodo} from "../../../../store/todoReducer";
 import {useAppDispatch} from "../../../../store/store";
@@ -19,10 +19,8 @@ import ModalCloseSvg from "./ModalCloseSvg";
 function ModalDelete(props: { id: string, setModalDelete: (boolean: boolean) => void }) {
     const {
         id,
-        setModalDelete
+        setModalDelete,
     } = props
-
-    const ref = useRef<HTMLDivElement>(null)
 
     const dispatch = useAppDispatch()
 
@@ -40,7 +38,7 @@ function ModalDelete(props: { id: string, setModalDelete: (boolean: boolean) => 
     if (!modal) return null
 
     return ReactDOM.createPortal((
-            <div className={model} id="overlay" ref={ref} onClick={handleClose}>
+            <div className={model} id="overlay" onClick={handleClose}>
                 <div className={modelDialog}>
                     <div className={modelDialogContent}>
                         <button className={modelDialogClose} onClick={handleClose} id="close">

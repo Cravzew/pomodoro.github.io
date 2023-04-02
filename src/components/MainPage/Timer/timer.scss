@@ -76,4 +76,10 @@
       }
     }
   }
+
+  &__empty {
+    background-color: var(--background-form);
+    width: 730px;
+    height: 521px;
+  }
 }
