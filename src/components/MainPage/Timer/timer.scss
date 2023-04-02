@@ -65,14 +65,26 @@
     &--form {
       display: flex;
 
-      button:first-child {
+      .green-button {
         @include buttonApp(var(--button-green-default-bg), var(--text-button));
         margin-right: 25px;
       }
 
-      button:last-child {
+      .gray-button {
         @include buttonApp(transperent, var(--line-dropdown));
         border: 2px solid var(--line-dropdown);
+        cursor: default;
+      }
+
+      .red-button {
+        @include buttonApp(transperent, var(--button-red-default-bg));
+        border: 2px solid var(--button-red-default-bg);
+
+        &:hover,
+        &:focus-visible {
+          background-color: var(--button-red-default-bg);
+          color: var(--text-button);
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {todoForm, todoFormInput, todoFormButton, tasks, todoTime} from './todoform.scss'
 import TodoTask from "./TodoTask/TodoTask";
-import {addTodo} from "../../../../store/todoReducer";
+import {addTodo, ITaskProps} from "../../../../store/todoReducer";
 import {useAppDispatch, useAppSelector} from "../../../../store/store";
 
 function TodoForm() {
@@ -9,6 +9,7 @@ function TodoForm() {
     const [userInput, setUserInput] = useState('')
 
     const todo = useAppSelector(state => state.todo.list)
+
     const dispatch = useAppDispatch()
 
     function handleSubmit(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -18,6 +19,10 @@ function TodoForm() {
             setUserInput('')
         }
     }
+
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todo))
+    }, [todo])
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setUserInput(event.target.value)
@@ -34,7 +39,8 @@ function TodoForm() {
             </form>
             <ul className={tasks}>
                 {todo.map((todo) =>
-                    <TodoTask key={todo.id} id={todo.id} task={todo.task} tomato={todo.tomato}/>
+                    <TodoTask key={todo.id} id={todo.id} task={todo.task} tomato={todo.tomato}
+                              isComplete={todo.isComplete}/>
                 )}
             </ul>
             <p className={todoTime}>1 час 15 минут</p>
