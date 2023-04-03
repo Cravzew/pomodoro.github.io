@@ -10,7 +10,13 @@ import {
     timerBodyForm,
     grayButton,
     redButton,
-    greenButton
+    greenButton,
+    bgDefault,
+    bgRed,
+    bgGreen,
+    textRed,
+    textGreen,
+    textDefault,
 } from './timer.scss'
 import {initialBreak, initialLongBreak, initialTime} from "../../../constants/time";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
@@ -24,8 +30,7 @@ function Timer() {
     const [mount, setMount] = useState(1)
     const [pauseCount, setPauseCount] = useState(1)
     const [state, setState] = useState('null') //  null / pause / work / break / long-break /
-
-    const tomato = 1
+    const [tomato, setTomato] = useState(1)
 
     const todo = useAppSelector(state => state.todo.list)
     const dispatch = useAppDispatch()
@@ -41,6 +46,7 @@ function Timer() {
         setMount(mount + 1)
         if (time === 0) {
             setTime(initialTime)
+            setTomato(tomato + 1)
             dispatch(incTimerTomato(tomato + 1))
             setPauseCount(pauseCount + 1)
         }
@@ -57,6 +63,7 @@ function Timer() {
         setMount(mount + 1)
         if (time === 0) {
             setTime(initial)
+            setTomato(tomato)
             dispatch(incTimerTomato(tomato))
             setPauseCount(pauseCount + 1)
         }
@@ -67,6 +74,7 @@ function Timer() {
 
     function handleReset() {
         setTime(initialTime)
+        setTomato(1)
         dispatch(incTimerTomato(1))
         setState('null')
         setMount(1)
@@ -74,7 +82,7 @@ function Timer() {
     }
 
     function handlePlus() {
-        // setTomato(tomato + 1)
+        setTomato(tomato + 1)
         dispatch(incTimerTomato(tomato + 1))
         setTime(time + 60)
     }
@@ -98,15 +106,16 @@ function Timer() {
         <section className={timer}>
             {todo.length !== 0 &&
                 <div>
-                    <div className={timerHeader} style={{
-                        backgroundColor: `${state === 'work' ? 'var(--button-red-default-bg)' : ''} ${state === 'break' || state === 'long-break' ? 'var(--button-green-default-bg)' : ''}`
-                    }}>
+                    <div
+                        className={`${timerHeader} ${state === 'null' ? 'bg-default' : ''} ${state === 'work' ? 'bg-red' : ''} ${(pauseCount % 4 === 0 || pauseCount % 2 === 0) ? 'bg-green' : 'bg-red'} ${(state === 'break' || state === 'long-break') ? 'bg-green' : ''}`}>
                         <p className={timerHeaderTask}>{todo[0].task}</p>
-                        <p className={timerHeaderTomato}>Помидор {todo[0].tomato}</p>
+                        <p className={timerHeaderTomato}>{`${(state === 'work' || state === 'null') ? 'Помидор' : 'Перерыв'}`} {todo[0].tomato}</p>
                     </div>
                     <div className={timerBody}>
                         <div className={timerBodyTimer}>
-                            <p>{minutes}:{seconds}</p>
+                            <p className={`${state === 'null' ? 'text-default' : ''} ${state === 'pause' ? 'text-default' : ''} ${state === 'pause-break' ? 'text-default' : ''} ${state === 'work' ? 'text-red' : ''} ${(state === 'break' || state === 'long-break') ? 'text-green' : ''}`}>
+                                {minutes}:{seconds}
+                            </p>
                             <button onClick={handlePlus}>
                                 <IncTimeSvg/>
                             </button>

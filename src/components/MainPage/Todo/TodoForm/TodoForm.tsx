@@ -3,6 +3,7 @@ import {todoForm, todoFormInput, todoFormButton, tasks, todoTime} from './todofo
 import TodoTask from "./TodoTask/TodoTask";
 import {addTodo, ITaskProps} from "../../../../store/todoReducer";
 import {useAppDispatch, useAppSelector} from "../../../../store/store";
+import {getPadTime} from "../../../../utils/getPadTime";
 
 function TodoForm() {
 
@@ -28,6 +29,12 @@ function TodoForm() {
         setUserInput(event.target.value)
     }
 
+    // const allTomato = todo.map(todo => todo.tomato).reduce((a, b) => a + b)
+    const time = todo.length * 25
+
+    const hours = Math.floor(time / 60)
+    const minutes = time - hours * 60
+
     return (
         <div className={todoForm}>
             <form>
@@ -43,7 +50,7 @@ function TodoForm() {
                               isComplete={todo.isComplete}/>
                 )}
             </ul>
-            <p className={todoTime}>1 час 15 минут</p>
+            <p className={todoTime}>{hours === 0 ? '' : `${hours} час`} {minutes === 0 ? '' : `${minutes} минут`}</p>
         </div>
     );
 }

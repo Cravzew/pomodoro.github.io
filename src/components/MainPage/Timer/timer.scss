@@ -7,7 +7,6 @@
   &__header {
     @include flexAlign;
     justify-content: space-between;
-    background-color: var(--line-dropdown);
     padding: 20px 40px;
 
     &--task {
@@ -40,7 +39,6 @@
         font-weight: 200;
         font-size: 150px;
         line-height: 179px;
-        color: var(--text-default);
       }
 
       button svg {
@@ -86,6 +84,7 @@
           color: var(--text-button);
         }
       }
+
     }
   }
 
@@ -94,4 +93,28 @@
     width: 730px;
     height: 521px;
   }
+}
+
+.bg-default {
+  background-color: var(--line-dropdown) !important;
+}
+
+.bg-red {
+  background-color: var(--button-red-default-bg);
+}
+
+.bg-green {
+  background-color: var(--button-green-default-bg);
+}
+
+.text-default {
+  color: var(--text-default);
+}
+
+.text-red {
+  color: var(--button-red-default-bg);
+}
+
+.text-green {
+  color: var(--button-green-default-bg);
 }
