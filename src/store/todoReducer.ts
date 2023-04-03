@@ -41,19 +41,12 @@ export const todoSlice = createSlice({
                 tomato: todo.tomato !== 1 ? todo.tomato -= 1 : todo.tomato
             } : todo)
         },
-        incTimerTomato(state, action: PayloadAction<number>) {
-            state.list = state.list.map((todo) => todo.tomato !== action.payload ? {
-                ...todo,
-                tomato: action.payload
-            } : todo)
+        incTimerTomato(state, action) {
+            const index = state.list.findIndex(item => item.id === action.payload.id);
+            const updatedState = [...state.list];
+            updatedState[index].tomato = action.payload.tomato;
         },
         updateTask(state, action) {
-            // state.list = state.list.map((todo) => todo.id === action.payload.id ? {
-            //     ...todo,
-            //     task: action.payload.task
-            // } : todo)
-            // console.log(action.payload.id)
-            // console.log(state.list.map(todo => todo.task))
             const index = state.list.findIndex(item => item.id === action.payload.id);
             const updatedState = [...state.list];
             updatedState[index].task = action.payload.task;

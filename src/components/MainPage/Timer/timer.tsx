@@ -30,10 +30,11 @@ function Timer() {
     const [mount, setMount] = useState(1)
     const [pauseCount, setPauseCount] = useState(1)
     const [state, setState] = useState('null') //  null / pause / work / break / long-break /
-    const [tomato, setTomato] = useState(1)
 
     const todo = useAppSelector(state => state.todo.list)
     const dispatch = useAppDispatch()
+
+    const tomato = todo.length === 0 ? 1 : todo[0].tomato
 
     const workState = state === 'work' || state === 'break' || state === 'long-break'
     const breakState = state === 'break' || state === 'long-break'
@@ -46,8 +47,7 @@ function Timer() {
         setMount(mount + 1)
         if (time === 0) {
             setTime(initialTime)
-            setTomato(tomato + 1)
-            dispatch(incTimerTomato(tomato + 1))
+            dispatch(incTimerTomato({id: todo[0].id, tomato: tomato + 1}))
             setPauseCount(pauseCount + 1)
         }
         if (mount % 4 === 0) {
@@ -63,8 +63,7 @@ function Timer() {
         setMount(mount + 1)
         if (time === 0) {
             setTime(initial)
-            setTomato(tomato)
-            dispatch(incTimerTomato(tomato))
+            dispatch(incTimerTomato({id: todo[0].id, tomato: tomato}))
             setPauseCount(pauseCount + 1)
         }
         if (state === name) {
@@ -74,16 +73,14 @@ function Timer() {
 
     function handleReset() {
         setTime(initialTime)
-        setTomato(1)
-        dispatch(incTimerTomato(1))
+        dispatch(incTimerTomato({id: todo[0].id, tomato: 1}))
         setState('null')
         setMount(1)
         setPauseCount(1)
     }
 
     function handlePlus() {
-        setTomato(tomato + 1)
-        dispatch(incTimerTomato(tomato + 1))
+        dispatch(incTimerTomato({id: todo[0].id, tomato: tomato + 1}))
         setTime(time + 60)
     }
 

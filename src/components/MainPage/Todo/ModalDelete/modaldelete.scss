@@ -52,7 +52,7 @@
     }
 
     &--button {
-      @include buttonApp(var(--button-red-default-bg), var(--text-button))
+      @include buttonApp(var(--button-red-default-bg), var(--text-button));
     }
 
     &--cancel {

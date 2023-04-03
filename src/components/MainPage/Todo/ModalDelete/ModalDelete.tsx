@@ -12,7 +12,7 @@ import {
     modelDialogHeader,
     modelDialogTitle,
     modelDialogButton,
-    modelDialogCancel
+    modelDialogCancel,
 } from './modaldelete.scss'
 import ModalCloseSvg from "./ModalCloseSvg";
 

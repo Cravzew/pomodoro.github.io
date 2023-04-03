@@ -29,8 +29,8 @@ function TodoForm() {
         setUserInput(event.target.value)
     }
 
-    // const allTomato = todo.map(todo => todo.tomato).reduce((a, b) => a + b)
-    const time = todo.length * 25
+    const allTomato = todo.length !== 0 ? todo.map(todo => todo.tomato).reduce((a, b) => a + b) : todo.length
+    const time = allTomato * 25
 
     const hours = Math.floor(time / 60)
     const minutes = time - hours * 60
