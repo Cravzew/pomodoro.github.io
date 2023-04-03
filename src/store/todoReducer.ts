@@ -47,11 +47,16 @@ export const todoSlice = createSlice({
                 tomato: action.payload
             } : todo)
         },
-        updateTask(state, action: PayloadAction<string>) {
-            state.list = state.list.map((todo) => todo.task !== action.payload ? {
-                ...todo,
-                task: action.payload
-            } : todo)
+        updateTask(state, action) {
+            // state.list = state.list.map((todo) => todo.id === action.payload.id ? {
+            //     ...todo,
+            //     task: action.payload.task
+            // } : todo)
+            // console.log(action.payload.id)
+            // console.log(state.list.map(todo => todo.task))
+            const index = state.list.findIndex(item => item.id === action.payload.id);
+            const updatedState = [...state.list];
+            updatedState[index].task = action.payload.task;
         },
         completeTask(state, action: PayloadAction<boolean>) {
             state.list = state.list.map((todo) => todo.isComplete !== action.payload ? {

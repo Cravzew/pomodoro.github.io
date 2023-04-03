@@ -35,7 +35,7 @@ function TodoTask({id, task, tomato}: ITaskProps) {
     function handleBlur() {
         if (text.length <= 3) return
         setIsEdit(false)
-        dispatch(updateTask(text))
+        dispatch(updateTask({id: id, task: text}))
     }
 
     setTimeout(() => {
