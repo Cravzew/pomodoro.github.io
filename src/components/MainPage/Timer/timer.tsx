@@ -22,14 +22,14 @@ import {initialBreak, initialLongBreak, initialTime} from "../../../constants/ti
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import IncTimeSvg from "./incTimeSvg";
 import {getPadTime} from "../../../utils/getPadTime";
-import {incTimerTomato, incTomato} from "../../../store/todoReducer";
+import {completeTask, incTimerTomato, incTomato, removeTodo} from "../../../store/todoReducer";
 
 function Timer() {
 
     const [time, setTime] = useState(initialTime)
     const [mount, setMount] = useState(1)
     const [pauseCount, setPauseCount] = useState(1)
-    const [state, setState] = useState('null') //  null / pause / work / break / long-break /
+    const [state, setState] = useState('null') //  null / pause / work / break / long-break / pause-break
 
     const todo = useAppSelector(state => state.todo.list)
     const dispatch = useAppDispatch()
@@ -77,6 +77,15 @@ function Timer() {
         setState('null')
         setMount(1)
         setPauseCount(1)
+    }
+
+    function handleComplete() {
+        dispatch(completeTask({id: todo[0].id, isComplete: true}))
+        setTime(initialTime)
+        setState('null')
+        setMount(1)
+        setPauseCount(1)
+        dispatch(removeTodo(todo[0].id))
     }
 
     function handlePlus() {
@@ -168,8 +177,7 @@ function Timer() {
                                 <button
                                     className={redButton}
                                     onClick={() => {
-                                        handleReset()
-                                        alert('Дело сделано')
+                                        handleComplete()
                                     }}>Сделано
                                 </button>
                             )}

@@ -1,36 +1,36 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import {removeTodo} from "../../../../store/todoReducer";
-import {useAppDispatch} from "../../../../store/store";
 import {
     model,
     modelDialog,
     modelDialogBody,
     modelDialogClose,
     modelDialogContent,
-    modelDialogFooter,
     modelDialogHeader,
     modelDialogTitle,
-    modelDialogButton,
-    modelDialogCancel,
-} from './modaldelete.scss'
+    modelDialogFooter
+} from './modal.scss'
 import ModalCloseSvg from "./ModalCloseSvg";
 
-function ModalDelete(props: { id: string, setModalDelete: (boolean: boolean) => void }) {
+interface IModalProps {
+    title: string,
+    children: React.ReactNode,
+    footer: React.ReactNode,
+    setModal: (value: boolean) => void
+}
+
+function Modal(props: IModalProps) {
+
     const {
-        id,
-        setModalDelete,
+        title,
+        children,
+        footer,
+        setModal
     } = props
-
-    const dispatch = useAppDispatch()
-
-    function handleDelete() {
-        dispatch(removeTodo(id))
-    }
 
     function handleClose(e: React.MouseEvent) {
         if (e.target === document.getElementById('overlay') || e.target === document.getElementById('close') || e.target === document.getElementById('cancel')) {
-            setModalDelete(false)
+            setModal(false)
         }
     }
 
@@ -45,13 +45,13 @@ function ModalDelete(props: { id: string, setModalDelete: (boolean: boolean) => 
                             <ModalCloseSvg/>
                         </button>
                         <div className={modelDialogHeader}>
-                            <h1 className={modelDialogTitle}>Удалить задачу</h1>
+                            <h1 className={modelDialogTitle}>{title}</h1>
                         </div>
                         <div className={modelDialogBody}>
-                            <button className={modelDialogButton} onClick={handleDelete}>Удалить</button>
+                            {children}
                         </div>
                         <div className={modelDialogFooter}>
-                            <button id="cancel" className={modelDialogCancel} onClick={handleClose}>Отмена</button>
+                            {footer}
                         </div>
                     </div>
                 </div>
@@ -60,4 +60,4 @@ function ModalDelete(props: { id: string, setModalDelete: (boolean: boolean) => 
     );
 }
 
-export default ModalDelete;
+export default Modal;

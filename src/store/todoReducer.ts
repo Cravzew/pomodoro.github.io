@@ -51,11 +51,10 @@ export const todoSlice = createSlice({
             const updatedState = [...state.list];
             updatedState[index].task = action.payload.task;
         },
-        completeTask(state, action: PayloadAction<boolean>) {
-            state.list = state.list.map((todo) => todo.isComplete !== action.payload ? {
-                ...todo,
-                isComplete: action.payload
-            } : todo)
+        completeTask(state, action) {
+            const index = state.list.findIndex(item => item.id === action.payload.id);
+            const updatedState = [...state.list];
+            updatedState[index].isComplete = action.payload.isComplete;
         },
         removeTodo(state, action: PayloadAction<string>) {
             state.list = state.list.filter((todo) => todo.id !== action.payload)

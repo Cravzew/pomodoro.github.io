@@ -95,3 +95,26 @@
     transition: all 0.3s cubic-bezier(.36, -0.64, .34, 1.76);
   }
 }
+
+.modal {
+  &__dialog {
+    &--body {
+      text-align: center;
+      margin-top: 25px;
+      overflow: auto;
+      margin-bottom: 10px;
+    }
+
+    &--button {
+      @include buttonApp(var(--button-red-default-bg), var(--text-button));
+    }
+
+    &--cancel {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 17px;
+      color: var(--text-default);
+      text-decoration: underline;
+    }
+  }
+}

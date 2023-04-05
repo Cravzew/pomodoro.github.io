@@ -6,16 +6,19 @@ import {
     tasksItemContentText,
     tasksDropdown,
     tasksDropdownItem,
+    modalDialogBody,
+    modalDialogButton,
+    modalDialogCancel,
 } from './todotask.scss'
 import DotSvg from "./DotSvg";
-import {decTomato, incTomato, ITaskProps, updateTask} from "../../../../../store/todoReducer";
+import {decTomato, incTomato, ITaskProps, removeTodo, updateTask} from "../../../../../store/todoReducer";
 import {Dropdown} from "./Dropdown/dropdown";
 import {useAppDispatch} from "../../../../../store/store";
 import IncSvg from "./Dropdown/IncSvg";
 import DecSvg from "./Dropdown/DecSvg";
 import EditSvg from "./Dropdown/EditSvg";
 import DelSvg from "./Dropdown/DelSvg";
-import ModalDelete from "../../ModalDelete/ModalDelete";
+import Modal from "../../../../Other/Modal/modal";
 
 function TodoTask({id, task, tomato}: ITaskProps) {
 
@@ -36,6 +39,10 @@ function TodoTask({id, task, tomato}: ITaskProps) {
         if (text.length <= 3) return
         setIsEdit(false)
         dispatch(updateTask({id: id, task: text}))
+    }
+
+    function handleDelete() {
+        dispatch(removeTodo(id))
     }
 
     setTimeout(() => {
@@ -85,7 +92,14 @@ function TodoTask({id, task, tomato}: ITaskProps) {
                 </ul>
             </Dropdown>
             {modalDelete &&
-                <ModalDelete id={id} setModalDelete={setModalDelete}/>
+                <Modal setModal={setModalDelete} title={'Удалить задачу'} footer={
+                    <button id="cancel" className={modalDialogCancel}
+                            onClick={() => setModalDelete(false)}>Отмена</button>
+                }>
+                    <div className={modalDialogBody}>
+                        <button className={modalDialogButton} onClick={handleDelete}>Удалить</button>
+                    </div>
+                </Modal>
             }
         </li>
     );

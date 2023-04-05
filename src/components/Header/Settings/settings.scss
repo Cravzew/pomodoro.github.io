@@ -1,0 +1,24 @@
+@import "src/styles/_index.scss";
+
+.modal-settings {
+  &__footer {
+    display: flex;
+    flex-direction: column;
+
+    &--button {
+      margin-top: 25px;
+      @include buttonApp(var(--button-green-default-bg), var(--text-button))
+    }
+
+    &--button:last-child {
+      @include buttonApp(var(--background-color), var(--button-red-default-bg));
+      border: 2px solid var(--button-red-default-bg);
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--button-red-default-bg);
+        color: var(--text-button);
+      }
+    }
+  }
+}

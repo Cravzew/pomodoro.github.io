@@ -1,8 +1,9 @@
 import React from 'react';
-import {header, headerContainer, headerContainerLink} from './header.scss'
+import {header, headerContainer, headerContainerLink, headerContainerList} from './header.scss'
 import {Link} from "react-router-dom";
 import LogoSvg from "./LogoSvg";
 import Theme from "./Theme/Theme";
+import Settings from "./Settings/settings";
 
 function Header() {
     return (
@@ -15,10 +16,9 @@ function Header() {
                     </span>
                 </Link>
                 <nav>
-                    <ul>
-                        <li>
-                            <Theme/>
-                        </li>
+                    <ul className={headerContainerList}>
+                        <Theme/>
+                        <Settings/>
                     </ul>
                 </nav>
             </div>

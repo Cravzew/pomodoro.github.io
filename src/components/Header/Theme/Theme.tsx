@@ -3,7 +3,6 @@ import {set} from "../../../store/themeReducer";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import SunSvg from "./SunSvg";
 import MoonSvg from "./MoonSvg";
-import {buttonContainer} from './theme.scss'
 
 const Theme = () => {
     const theme = useAppSelector(state => state.theme)
@@ -20,25 +19,27 @@ const Theme = () => {
     }
 
     return (
-        <button
-            onClick={handleChange}
-        >
-            {theme === 'light' ?
-                <div className={buttonContainer}>
-                    <SunSvg/>
-                    <span>
+        <li>
+            <button
+                onClick={handleChange}
+            >
+                {theme === 'light' ?
+                    <div>
+                        <SunSvg/>
+                        <span>
                     Светлая тема
                     </span>
-                </div>
-                :
-                <div className={buttonContainer}>
-                    <MoonSvg/>
-                    <span>
+                    </div>
+                    :
+                    <div>
+                        <MoonSvg/>
+                        <span>
                     Тёмная тема
                     </span>
-                </div>
-            }
-        </button>
+                    </div>
+                }
+            </button>
+        </li>
     )
 }
 

@@ -23,5 +23,16 @@
         color: var(--header-text)
       }
     }
+
+    &--list {
+      @include flexAlign;
+      li {
+        @include headerNav
+      }
+
+      li:last-child {
+        margin-left: 35px;
+      }
+    }
   }
 }

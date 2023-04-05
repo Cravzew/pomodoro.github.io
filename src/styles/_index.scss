@@ -54,3 +54,33 @@
     }
   }
 }
+
+@mixin headerNav {
+  button {
+    div {
+      @include flexAlign;
+      @include headerItem;
+    }
+  }
+}
+
+@mixin customInput {
+  border: none;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 17px;
+  background-color: var(--background-form);
+  padding: 19px 15px;
+  cursor: pointer;
+  color: var(--text-default);
+  outline-color: var(--header-text);
+
+  &:focus-visible,
+  &:hover {
+    outline: 1px solid var(--header-text);
+  }
+
+  &::placeholder {
+    color: var(--placeholder-text);
+  }
+}

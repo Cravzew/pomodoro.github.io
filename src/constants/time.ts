@@ -1,3 +1,3 @@
-export const initialTime = 5
-export const initialBreak = 3
-export const initialLongBreak = 10
+export const initialTime = 25 * 60
+export const initialBreak = 5 * 60
+export const initialLongBreak = 15 * 60
