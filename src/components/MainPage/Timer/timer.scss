@@ -3,6 +3,7 @@
 .timer {
   max-width: 730px;
   width: 100%;
+  margin-left: 30px;
 
   &__header {
     @include flexAlign;
@@ -119,4 +120,11 @@
 
 .text-green {
   color: var(--button-green-default-bg);
+}
+
+@media screen and (max-width: 1280px) {
+  .timer {
+    margin-left: 0;
+    margin-bottom: 50px;
+  }
 }

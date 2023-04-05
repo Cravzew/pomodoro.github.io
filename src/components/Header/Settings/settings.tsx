@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SettingsSvg from "./SettingsSvg";
 import Modal from "../../Other/Modal/modal";
 import {
@@ -10,11 +10,15 @@ import {
 
 function Settings() {
     const [modalSettings, setModalSettings] = useState(false)
-    const [inputWork, setInputWork] = useState('25')
+    const [inputWork, setInputWork] = useState(JSON.parse(localStorage.getItem('work-time')) || 25)
+    const [inputBreak, setInputBreak] = useState(JSON.parse(localStorage.getItem('break-time')) || 5)
+    const [inputLongBreak, setInputLongBreak] = useState(JSON.parse(localStorage.getItem('long-break-time')) || 30)
 
-    function handleChangeWork(e: React.ChangeEvent<HTMLInputElement>) {
-        setInputWork(e.target.value)
-    }
+    useEffect(() => {
+        localStorage.setItem("work-time", JSON.stringify(inputWork));
+        localStorage.setItem("break-time", JSON.stringify(inputBreak));
+        localStorage.setItem("long-break-time", JSON.stringify(inputLongBreak));
+    }, [inputWork, inputBreak, inputLongBreak]);
 
     return (
         <li>
@@ -36,20 +40,22 @@ function Settings() {
                     <div className={modalSettingsBody}>
                         <div className={modalSettingsBodyContent}>
                             <p>Один помидор</p>
-                            <input type="number" min={1} max={99} value={localStorage.getItem('work-time')}
-                                   onChange={handleChangeWork}/>
+                            <input type="number" min={1} max={99} value={inputWork}
+                                   onChange={(e) => setInputWork(e.target.valueAsNumber)}/>
                         </div>
                         <div className={modalSettingsBodyContent}>
                             <p>Длинный перерыв</p>
-                            <input type="number"/>
+                            <input type="number" min={1} max={99} value={inputBreak}
+                                   onChange={(e) => setInputBreak(e.target.valueAsNumber)}/>
                         </div>
                         <div className={modalSettingsBodyContent}>
                             <p>Короткий перерыв</p>
-                            <input type="number"/>
+                            <input type="number" min={1} max={99} value={inputLongBreak}
+                                   onChange={(e) => setInputLongBreak(e.target.valueAsNumber)}/>
                         </div>
                         <div className={modalSettingsBodyContent}>
                             <p>Частота длинных перерывов</p>
-                            <input type="number"/>
+                            <input type="number" min={1} max={99}/>
                         </div>
                     </div>
                 </Modal>
