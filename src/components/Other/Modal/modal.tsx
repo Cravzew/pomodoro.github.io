@@ -29,7 +29,7 @@ function Modal(props: IModalProps) {
     } = props
 
     function handleClose(e: React.MouseEvent) {
-        if (e.target === document.getElementById('overlay') || e.target === document.getElementById('close') || e.target === document.getElementById('cancel')) {
+        if (e.target === document.getElementById('overlay')) {
             setModal(false)
         }
     }
@@ -41,7 +41,7 @@ function Modal(props: IModalProps) {
             <div className={model} id="overlay" onClick={handleClose}>
                 <div className={modelDialog}>
                     <div className={modelDialogContent}>
-                        <button className={modelDialogClose} onClick={handleClose} id="close">
+                        <button className={modelDialogClose} onClick={() => setModal(false)} id="close">
                             <ModalCloseSvg/>
                         </button>
                         <div className={modelDialogHeader}>

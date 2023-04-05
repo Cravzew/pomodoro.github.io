@@ -30,7 +30,7 @@ function TodoForm() {
     }
 
     const allTomato = todo.length !== 0 ? todo.map(todo => todo.tomato).reduce((a, b) => a + b) : todo.length
-    const time = allTomato * 25
+    const time = allTomato * JSON.parse(localStorage.getItem('work-time'))
 
     const hours = Math.floor(time / 60)
     const minutes = time - hours * 60
