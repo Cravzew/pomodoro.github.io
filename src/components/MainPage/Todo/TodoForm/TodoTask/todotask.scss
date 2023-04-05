@@ -48,6 +48,24 @@
     border: 1px solid var(--line-dropdown);
     padding-top: 2px;
 
+    &::after {
+      content: '';
+      position: absolute;
+      left: 70px;
+      top: -13px;
+      border: 10px solid transparent;
+      border-bottom: 5px solid var(--background-color);
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 70px;
+      top: -14px;
+      border: 10px solid transparent;
+      border-bottom: 5px solid var(--line-dropdown);
+    }
+
     &--item {
       @include flexAlign;
       padding: 10px 15px;
@@ -57,23 +75,6 @@
         margin-right: 8px;
       }
 
-      &::after {
-        content: '';
-        position: absolute;
-        left: 70px;
-        top: -13px;
-        border: 10px solid transparent;
-        border-bottom: 5px solid var(--background-color);
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: 70px;
-        top: -14px;
-        border: 10px solid transparent;
-        border-bottom: 5px solid var(--line-dropdown);
-      }
 
       button {
         font-weight: 300;

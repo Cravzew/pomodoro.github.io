@@ -20,6 +20,12 @@ function Settings() {
         localStorage.setItem("long-break-time", JSON.stringify(inputLongBreak));
     }, [inputWork, inputBreak, inputLongBreak]);
 
+    function handleDefault() {
+        setInputWork(25)
+        setInputBreak(5)
+        setInputLongBreak(30)
+    }
+
     return (
         <li>
             <button onClick={() => setModalSettings(true)}>
@@ -31,8 +37,8 @@ function Settings() {
             {modalSettings &&
                 <Modal setModal={setModalSettings} title={"Настройки"} footer={
                     <div className={modalSettingsFooter}>
-                        <button className={modalSettingsFooterButton}>Сохранить</button>
-                        <button className={modalSettingsFooterButton} onClick={() => setModalSettings(false)}>По
+                        <p>После изменения настроек не забудьте перезагрузить страницу</p>
+                        <button className={modalSettingsFooterButton} onClick={handleDefault}>По
                             умолчанию
                         </button>
                     </div>
@@ -44,18 +50,14 @@ function Settings() {
                                    onChange={(e) => setInputWork(e.target.valueAsNumber)}/>
                         </div>
                         <div className={modalSettingsBodyContent}>
-                            <p>Длинный перерыв</p>
+                            <p>Короткий перерыв</p>
                             <input type="number" min={1} max={99} value={inputBreak}
                                    onChange={(e) => setInputBreak(e.target.valueAsNumber)}/>
                         </div>
                         <div className={modalSettingsBodyContent}>
-                            <p>Короткий перерыв</p>
+                            <p>Длинный перерыв</p>
                             <input type="number" min={1} max={99} value={inputLongBreak}
                                    onChange={(e) => setInputLongBreak(e.target.valueAsNumber)}/>
-                        </div>
-                        <div className={modalSettingsBodyContent}>
-                            <p>Частота длинных перерывов</p>
-                            <input type="number" min={1} max={99}/>
                         </div>
                     </div>
                 </Modal>
