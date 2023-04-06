@@ -1,12 +1,17 @@
 import React from 'react';
 import Header from "./components/Header/header";
-import MainPage from "./components/MainPage/MainPage";
+import Page from "./components/Other/Page/Page";
+import Timer from "./components/MainPage/Timer/timer";
+import Todo from "./components/MainPage/Todo/Todo";
 
 function App() {
     return (
         <>
             <Header/>
-            <MainPage/>
+            <Page>
+                <Todo/>
+                <Timer/>
+            </Page>
         </>
     );
 }

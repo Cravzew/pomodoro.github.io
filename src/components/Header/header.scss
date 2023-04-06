@@ -26,12 +26,13 @@
 
     &--list {
       @include flexAlign;
+
       li {
         @include headerNav
       }
 
-      li:last-child {
-        margin-left: 35px;
+      li:not(:last-child) {
+        margin-right: 35px;
       }
     }
   }

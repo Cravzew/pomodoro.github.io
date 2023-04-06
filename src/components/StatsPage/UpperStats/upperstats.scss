@@ -1,0 +1,31 @@
+@import "src/styles/_index.scss";
+
+.upper {
+  margin-bottom: 32px;
+
+  &__up {
+    @include flexAlign;
+    justify-content: space-between;
+
+    &--header {
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 33px;
+      color: var(--text-default);
+    }
+
+    &--dropdown {
+      @include flexAlign;
+      background-color: var(--background-form);
+      padding: 20px 15px;
+
+      div {
+        @include flexAlign;
+      }
+    }
+  }
+
+  &__down {
+    margin-top: 30px;
+  }
+}

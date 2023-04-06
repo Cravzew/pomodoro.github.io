@@ -7,11 +7,17 @@ import {Provider} from "react-redux";
 import {store} from "./store/store";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import ReactDOM from "react-dom/client";
+import Stats from "./Stats";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App/>,
+        errorElement: <ErrorPage/>
+    },
+    {
+        path: '/stats',
+        element: <Stats/>,
         errorElement: <ErrorPage/>
     },
 ])

@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import LogoSvg from "./LogoSvg";
 import Theme from "./Theme/Theme";
 import Settings from "./Settings/settings";
+import StatsNav from "./StatsNav/StatsNav";
 
 function Header() {
     return (
@@ -19,6 +20,7 @@ function Header() {
                     <ul className={headerContainerList}>
                         <Theme/>
                         <Settings/>
+                        <StatsNav/>
                     </ul>
                 </nav>
             </div>
