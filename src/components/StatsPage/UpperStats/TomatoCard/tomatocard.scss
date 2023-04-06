@@ -1,0 +1,44 @@
+@import "src/styles/_index.scss";
+
+.tomatocard {
+  background-color: var(--background-form);
+  width: 296px;
+
+  &__number {
+    text-align: center;
+
+    &--tomato {
+      @include flexAlign;
+      justify-content: center;
+      padding-top: 23px;
+      margin-bottom: 22px;
+
+      svg {
+        margin-right: 15px;
+      }
+
+      span {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 33px;
+        color: var(--placeholder-text);
+      }
+    }
+
+    &--text {
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 33px;
+      color: var(--text-inverse);
+      background-color: var(--header-text);
+      padding: 10px 0;
+    }
+  }
+
+  &__empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 0;
+  }
+}

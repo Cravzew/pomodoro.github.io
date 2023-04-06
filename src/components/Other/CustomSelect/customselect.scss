@@ -1,0 +1,18 @@
+@import "src/styles/_index.scss";
+
+.dropdown {
+  @include flexAlign;
+  background-color: var(--background-form);
+  padding: 20px 15px;
+  cursor: pointer;
+
+  &__content {
+    @include flexAlign;
+    justify-content: space-between;
+    width: 370px;
+
+    &--header {
+      font-weight: 400;
+    }
+  }
+}

@@ -13,19 +13,17 @@
       line-height: 33px;
       color: var(--text-default);
     }
-
-    &--dropdown {
-      @include flexAlign;
-      background-color: var(--background-form);
-      padding: 20px 15px;
-
-      div {
-        @include flexAlign;
-      }
-    }
   }
 
   &__down {
     margin-top: 30px;
+    margin-bottom: 32px;
+    display: flex;
+
+    &--left {
+      display: flex;
+      flex-direction: column;
+      margin-right: 32px;
+    }
   }
 }
