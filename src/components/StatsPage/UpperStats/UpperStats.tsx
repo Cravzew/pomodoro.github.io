@@ -1,5 +1,4 @@
 import React from 'react';
-import ArrowSvg from "./ArrowSvg";
 import {
     upper,
     upperDown,
@@ -13,11 +12,14 @@ import TomatoCard from "./TomatoCard/TomatoCard";
 import ChartGraphics from "./ChartGraphics/ChartGraphics";
 
 function UpperStats() {
+
+    const selectList = ['Прошедшая неделя', '2 недели назад']
+
     return (
         <div className={upper}>
             <div className={upperUp}>
                 <h2 className={upperUpHeader}>Ваша активность</h2>
-                <CustomSelect/>
+                <CustomSelect selected={'Эта неделя'} lists={selectList}/>
             </div>
             <div className={upperDown}>
                 <div className={upperDownLeft}>

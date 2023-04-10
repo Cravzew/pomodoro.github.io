@@ -1,10 +1,11 @@
 @import "src/styles/_index.scss";
 
-.dropdown {
+.select {
   @include flexAlign;
   background-color: var(--background-form);
   padding: 20px 15px;
   cursor: pointer;
+  position: relative;
 
   &__content {
     @include flexAlign;
@@ -14,5 +15,25 @@
     &--header {
       font-weight: 400;
     }
+  }
+
+  &__list {
+    position: absolute;
+    background-color: var(--background-form);
+    left: 0;
+    top: 57px;
+    z-index: 1;
+    box-shadow: var(--box-shadow-header);
+
+    li {
+      padding: 20px 15px;
+      width: 400px;
+      color: var(--text-default);
+      border-top: 1px solid var(--line-dropdown);
+    }
+  }
+
+  .show {
+    top: 57px
   }
 }

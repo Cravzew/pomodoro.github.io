@@ -1,20 +1,49 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ArrowSvg from "../../StatsPage/UpperStats/ArrowSvg";
 import {
-    dropdown,
-    dropdownContent,
-    dropdownContentHeader
+    select,
+    selectContent,
+    selectContentHeader,
+    selectList
 } from './customselect.scss'
+import ReactDOM from "react-dom";
 
-function CustomSelect() {
+interface ICustomSelect {
+    selected: string,
+    lists: string[]
+}
+
+function CustomSelect(props: ICustomSelect) {
+
+    const {
+        selected,
+        lists
+    } = props
+
+    const [isOpen, setIsOpen] = useState(false)
+    const [selecter, setSelecter] = useState(selected)
+
     return (
-        <div className={dropdown}>
-            <div className={dropdownContent}>
-                <p className={dropdownContentHeader}>
-                    Эта неделя
+        <div className={select}>
+            <div className={selectContent} onClick={() => {
+                setIsOpen(!isOpen)
+            }}>
+                <p className={selectContentHeader}>
+                    {selecter}
                 </p>
-                <ArrowSvg/>
+                <ArrowSvg rotate={isOpen ? 'down' : 'up'}/>
             </div>
+            {isOpen &&
+                <ul className={selectList}>
+                    {lists.map((it) =>
+                        <li key={Math.round(Math.random() * 100)} onClick={() => {
+                            setSelecter(selecter !== it ? it : selected)
+                            setIsOpen(false)
+                        }}>
+                            {selecter !== it ? it : selected}
+                        </li>)}
+                </ul>
+            }
         </div>
     );
 }
