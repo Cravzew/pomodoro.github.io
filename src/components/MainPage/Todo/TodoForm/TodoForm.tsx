@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {todoForm, todoFormInput, todoFormButton, tasks, todoTime} from './todoform.scss'
 import TodoTask from "./TodoTask/TodoTask";
-import {addTodo, ITaskProps} from "../../../../store/todoReducer";
+import {addTodo} from "../../../../store/todoReducer";
 import {useAppDispatch, useAppSelector} from "../../../../store/store";
-import {getPadTime} from "../../../../utils/getPadTime";
+import {incTomatoesToday} from "../../../../store/dataReducer";
 
 function TodoForm() {
 

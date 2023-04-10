@@ -15,7 +15,6 @@ import {decTomato, incTomato, ITaskProps, removeTodo, updateTask} from "../../..
 import {Dropdown} from "./Dropdown/dropdown";
 import {useAppDispatch} from "../../../../../store/store";
 import IncSvg from "./Dropdown/IncSvg";
-import DecSvg from "./Dropdown/DecSvg";
 import EditSvg from "./Dropdown/EditSvg";
 import DelSvg from "./Dropdown/DelSvg";
 import Modal from "../../../../Other/Modal/modal";

@@ -5,6 +5,7 @@ import UpperStats from "./components/StatsPage/UpperStats/UpperStats";
 import DownStats from "./components/StatsPage/DownStats/DownStats";
 
 function Stats() {
+
     return (
         <>
             <Header/>

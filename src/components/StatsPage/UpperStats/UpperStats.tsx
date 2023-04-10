@@ -10,10 +10,13 @@ import CustomSelect from "../../Other/CustomSelect/CustomSelect";
 import TodayCard from "./TodayCard/TodayCard";
 import TomatoCard from "./TomatoCard/TomatoCard";
 import ChartGraphics from "./ChartGraphics/ChartGraphics";
+import {getDay} from "date-fns";
 
 function UpperStats() {
 
     const selectList = ['Прошедшая неделя', '2 недели назад']
+
+    let days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
 
     return (
         <div className={upper}>
@@ -23,7 +26,7 @@ function UpperStats() {
             </div>
             <div className={upperDown}>
                 <div className={upperDownLeft}>
-                    <TodayCard date={'Понедельник'} text={'51 минут'}/>
+                    <TodayCard date={days[getDay(new Date()) - 1]} text={undefined}/>
                     <TomatoCard tomato={15}/>
                 </div>
                 <ChartGraphics/>

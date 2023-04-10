@@ -11,18 +11,13 @@ import {
     grayButton,
     redButton,
     greenButton,
-    bgDefault,
-    bgRed,
-    bgGreen,
-    textRed,
-    textGreen,
-    textDefault,
 } from './timer.scss'
 import {initialBreak, initialLongBreak, initialTime} from "../../../constants/time";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import IncTimeSvg from "./incTimeSvg";
 import {getPadTime} from "../../../utils/getPadTime";
-import {completeTask, incTimerTomato, incTomato, removeTodo} from "../../../store/todoReducer";
+import {completeTask, incTimerTomato, removeTodo} from "../../../store/todoReducer";
+import {incComplete, incPauseSec, incStopCount, incWorkSec} from "../../../store/dataReducer";
 
 function Timer() {
 
@@ -32,6 +27,8 @@ function Timer() {
     const [state, setState] = useState('null') //  null / pause / work / break / long-break / pause-break
 
     const todo = useAppSelector(state => state.todo.list)
+    const stats = useAppSelector(state => state.data.stats)
+
     const dispatch = useAppDispatch()
 
     const tomato = todo.length === 0 ? 1 : todo[0].tomato
@@ -41,6 +38,10 @@ function Timer() {
 
     const minutes = getPadTime(Math.floor(time / 60))
     const seconds = getPadTime(time - Number(minutes) * 60)
+
+    useEffect(() => {
+        localStorage.setItem('stats', JSON.stringify(stats))
+    }, [stats])
 
     function stateWork(): void {
         setState('work')
@@ -77,6 +78,7 @@ function Timer() {
         setState('null')
         setMount(1)
         setPauseCount(1)
+        dispatch(incStopCount())
     }
 
     function handleComplete() {
@@ -86,6 +88,7 @@ function Timer() {
         setMount(1)
         setPauseCount(1)
         dispatch(removeTodo(todo[0].id))
+        dispatch(incComplete())
     }
 
     function handlePlus() {
@@ -107,6 +110,21 @@ function Timer() {
             }
         }, [time, state, workState]
     )
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            if (state === 'work') {
+                dispatch(incWorkSec())
+            }
+            if (state === 'pause') {
+                dispatch(incPauseSec())
+            }
+        }, 1000)
+
+        return () => {
+            clearInterval(interval)
+        }
+    }, [state])
 
     return (
         <section className={timer}>
@@ -144,6 +162,7 @@ function Timer() {
                                             } else {
                                                 setState('pause-break')
                                             }
+                                            dispatch(incStopCount())
                                         }}>Пауза
                                     </button>
                                     :
