@@ -1,0 +1,28 @@
+.infocomponent {
+  display: inline-block;
+  padding: 25px;
+  position: relative;
+  width: 405px;
+  height: 179px;
+
+  &--header {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    color: var(--text-default);
+    margin-bottom: 20px;
+  }
+
+  &--infotext {
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 76px;
+    color: var(--text-default);
+  }
+
+  svg {
+    position: absolute;
+    right: 27px;
+    top: 30px;
+  }
+}

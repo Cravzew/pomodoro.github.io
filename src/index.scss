@@ -77,7 +77,12 @@ a {
   --button-red-hover-bg: #b0311c;
   --line-todo: #E4E4E4;
   --line-dropdown: #C4C4C4;
-  --text-inverse: #fff
+  --text-inverse: #fff;
+  --type-timer: #DFDCFE;
+  --type-stops: #C5F1FF;
+  --type-focus: #FFDDA9;
+  --background-info: #ECECEC;
+  --low-line: #EA8A79;
 }
 
 :root[data-theme="dark"] {
@@ -95,7 +100,12 @@ a {
   --button-red-hover-bg: #b0311c;
   --line-todo: #E4E4E4;
   --line-dropdown: #C4C4C4;
-  --text-inverse: #000
+  --text-inverse: #000;
+  --type-timer: #625cb4;
+  --type-stops: #438198;
+  --type-focus: #9f7335;
+  --background-info: #595959;
+  --low-line: #EA8A79;
 }
 
 @font-face {

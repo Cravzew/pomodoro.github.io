@@ -10,6 +10,7 @@ import {
 import CustomSelect from "../../Other/CustomSelect/CustomSelect";
 import TodayCard from "./TodayCard/TodayCard";
 import TomatoCard from "./TomatoCard/TomatoCard";
+import ChartGraphics from "./ChartGraphics/ChartGraphics";
 
 function UpperStats() {
     return (
@@ -23,9 +24,7 @@ function UpperStats() {
                     <TodayCard date={'Понедельник'} text={'51 минут'}/>
                     <TomatoCard tomato={15}/>
                 </div>
-                <div>
-                    Диаграмка
-                </div>
+                <ChartGraphics/>
             </div>
         </div>
     );
