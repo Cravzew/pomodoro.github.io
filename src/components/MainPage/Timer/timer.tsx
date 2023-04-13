@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {
-    timer,
-    timerHeader,
-    timerHeaderTomato,
-    timerHeaderTask,
-    timerBody,
-    timerBodyTimer,
-    timerBodyTask,
-    timerBodyForm,
     grayButton,
-    redButton,
     greenButton,
+    redButton,
+    timer,
+    timerBody,
+    timerBodyForm,
+    timerBodyTask,
+    timerBodyTimer,
+    timerHeader,
+    timerHeaderTask,
+    timerHeaderTomato,
 } from './timer.scss'
 import {initialBreak, initialLongBreak, initialTime} from "../../../constants/time";
 import {useAppDispatch, useAppSelector} from "../../../store/store";
 import IncTimeSvg from "./incTimeSvg";
 import {getPadTime} from "../../../utils/getPadTime";
 import {completeTask, incTimerTomato, removeTodo} from "../../../store/todoReducer";
-import {incComplete, incPauseSec, incStopCount, incWorkSec} from "../../../store/dataReducer";
+import {incComplete, incPauseSec, incStopCount, incTomatoesToday, incWorkSec} from "../../../store/dataReducer";
 
 function Timer() {
 
@@ -66,6 +66,7 @@ function Timer() {
             setTime(initial)
             dispatch(incTimerTomato({id: todo[0].id, tomato: tomato}))
             setPauseCount(pauseCount + 1)
+            dispatch(incTomatoesToday())
         }
         if (state === name) {
             return stateWork()
@@ -89,6 +90,7 @@ function Timer() {
         setPauseCount(1)
         dispatch(removeTodo(todo[0].id))
         dispatch(incComplete())
+        dispatch(incTomatoesToday())
     }
 
     function handlePlus() {

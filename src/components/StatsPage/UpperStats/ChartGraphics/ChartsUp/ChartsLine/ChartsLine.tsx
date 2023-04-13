@@ -1,23 +1,27 @@
 import React from 'react';
-import {
-    chartsline
-} from './chartsline.scss'
+import {chartsline} from './chartsline.scss'
 
 interface IChartsLine {
-    minutes: number
-    hours: number
+    number: number
 }
 
 function ChartsLine(props: IChartsLine) {
 
     const {
-        hours,
-        minutes
+        number
     } = props
+
+    const hours = Math.floor(number / 60 / 60);
+    const minutes = Math.floor(number / 60) - (hours * 60);
+    const seconds = number % 60;
 
     return (
         <div className={chartsline}>
-            <span>{hours === 0 ? '' : `${hours} ч`} {minutes} мин</span>
+            <span>
+                {hours ? `${hours} ч` : ''}
+                {minutes ? `${minutes} мин` : ''}
+                {hours === 0 ? `${seconds} сек` : ''}
+            </span>
         </div>
     );
 }

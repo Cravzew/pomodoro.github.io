@@ -1,24 +1,26 @@
 import React from 'react';
-import {
-    todaycard,
-    todaycardHeader,
-    todaycardTime,
-    todaycardText
-} from './todaycard.scss'
+import {todaycard, todaycardHeader, todaycardText} from './todaycard.scss'
 
 interface ITodayCard {
     date: string,
-    text?: string
+    number?: number
 }
 
-function TodayCard({date, text}: ITodayCard) {
+function TodayCard({date, number}: ITodayCard) {
+
+    const hours = Math.floor(number / 60 / 60);
+    const minutes = Math.floor(number / 60) - (hours * 60);
+    const seconds = number % 60;
 
     return (
         <div className={todaycard}>
             <h3 className={todaycardHeader}>{date}</h3>
-            {text ?
-                <p className={todaycardText}>Вы работали над задачами в течение <span
-                    style={{color: 'var(--header-text)', fontWeight: '700'}}>{text}</span></p>
+            {number ?
+                <p className={todaycardText}>Вы работали над задачами в течение <span>
+                    {hours ? `${hours} часов` : ''}
+                    {minutes ? `${minutes} минут` : ''}
+                    {seconds ? `${seconds} секунд` : ''}
+                </span></p>
                 :
                 <p className={todaycardText}>Нет данных</p>
             }

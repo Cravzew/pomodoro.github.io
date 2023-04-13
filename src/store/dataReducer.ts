@@ -15,16 +15,14 @@ type itemsState = {
 }
 
 const initialState: itemsState = {
-    stats: JSON.parse(localStorage.getItem('stats')) || [
-        {
-            date: format(new Date(), 'dd/MM/yyyy'),
-            work_sec: 0,
-            pause_sec: 0,
-            isDone: 0,
-            stop_count: 0,
-            tomatoesToday: 0,
-        }
-    ]
+    stats: JSON.parse(localStorage.getItem('stats')) || [{
+        date: format(new Date(), 'dd/MM/yyyy'),
+        work_sec: 0,
+        pause_sec: 0,
+        isDone: 0,
+        stop_count: 0,
+        tomatoesToday: 0,
+    }]
 }
 
 export const dateSlice = createSlice({
@@ -55,10 +53,10 @@ export const dateSlice = createSlice({
                 stop_count: item.stop_count += 1
             } : item)
         },
-        incTomatoesToday(state, action) {
+        incTomatoesToday(state) {
             state.stats = state.stats.map((item) => item.date === format(new Date(), 'dd/MM/yyyy') ? {
                 ...item,
-                tomatoesToday: action.payload.tomatoesToday
+                tomatoesToday: item.tomatoesToday += 1
             } : item)
         },
     }

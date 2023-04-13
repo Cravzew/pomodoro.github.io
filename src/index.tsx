@@ -11,12 +11,12 @@ import Stats from "./Stats";
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/stats',
         element: <App/>,
         errorElement: <ErrorPage/>
     },
     {
-        path: '/stats',
+        path: '/',
         element: <Stats/>,
         errorElement: <ErrorPage/>
     },

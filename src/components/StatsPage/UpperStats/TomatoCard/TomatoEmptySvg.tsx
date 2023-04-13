@@ -25,13 +25,13 @@ function TomatoEmptySvg() {
             </g>
             <defs>
                 <filter id="filter0_f_16_527" x="20" y="66" width="19" height="19" filterUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB">
+                        colorInterpolationFilters="sRGB">
                     <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
                     <feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_16_527"/>
                 </filter>
                 <filter id="filter1_f_16_527" x="76" y="66" width="19" height="19" filterUnits="userSpaceOnUse"
-                        color-interpolation-filters="sRGB">
+                        colorInterpolationFilters="sRGB">
                     <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
                     <feGaussianBlur stdDeviation="2" result="effect1_foregroundBlur_16_527"/>

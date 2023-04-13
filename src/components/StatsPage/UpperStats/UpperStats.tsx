@@ -1,22 +1,19 @@
 import React from 'react';
-import {
-    upper,
-    upperDown,
-    upperUp,
-    upperUpHeader,
-    upperDownLeft
-} from './upperstats.scss'
+import {upper, upperDown, upperDownLeft, upperUp, upperUpHeader} from './upperstats.scss'
 import CustomSelect from "../../Other/CustomSelect/CustomSelect";
 import TodayCard from "./TodayCard/TodayCard";
 import TomatoCard from "./TomatoCard/TomatoCard";
 import ChartGraphics from "./ChartGraphics/ChartGraphics";
 import {getDay} from "date-fns";
+import {useAppSelector} from "../../../store/store";
 
 function UpperStats() {
 
     const selectList = ['Прошедшая неделя', '2 недели назад']
 
-    let days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+    const days = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскресенье'];
+
+    const data = useAppSelector(state => state.data.stats)
 
     return (
         <div className={upper}>
@@ -26,8 +23,9 @@ function UpperStats() {
             </div>
             <div className={upperDown}>
                 <div className={upperDownLeft}>
-                    <TodayCard date={days[getDay(new Date()) - 1]} text={undefined}/>
-                    <TomatoCard tomato={15}/>
+                    <TodayCard date={days[getDay(new Date()) - 1]}
+                               number={data.map(i => i.work_sec).reduce((a, b) => a + b)}/>
+                    <TomatoCard tomato={data.map(i => i.tomatoesToday).reduce((a, b) => a + b)}/>
                 </div>
                 <ChartGraphics/>
             </div>

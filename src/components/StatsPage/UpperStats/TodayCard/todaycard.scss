@@ -17,5 +17,10 @@
     font-size: 16px;
     line-height: 28px;
     color: var(--text-default);
+
+    span {
+      color: var(--header-text);
+      font-weight: 700;
+    }
   }
 }
