@@ -32,9 +32,9 @@ function InfoComponent(props: IInfoComponent) {
             {type === 'timer' ?
                 <p className={infocomponentInfotext}>
                     {infotext === 0 ? '0с' : ''}
-                    {hours ? `${hours}ч` : ''}
-                    {minutes ? `${minutes}м` : ''}
-                    {hours === 0 ? `${seconds}с` : ''}
+                    {hours ? `${hours}ч\u00A0` : ''}
+                    {minutes ? `${minutes}м\u00A0` : ''}
+                    {hours === 0 && seconds ? `${seconds}с ` : ''}
                 </p>
                 :
                 <p className={infocomponentInfotext}>{infotext}{prefix}</p>

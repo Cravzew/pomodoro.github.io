@@ -17,9 +17,9 @@ function TodayCard({date, number}: ITodayCard) {
             <h3 className={todaycardHeader}>{date}</h3>
             {number ?
                 <p className={todaycardText}>Вы работали над задачами в течение <span>
-                    {hours ? `${hours} часов` : ''}
-                    {minutes ? `${minutes} минут` : ''}
-                    {seconds ? `${seconds} секунд` : ''}
+                    {hours ? `${hours} часов\u00A0` : ''}
+                    {minutes ? `${minutes} минут\u00A0` : ''}
+                    {hours === 0 ? `${seconds} секунд\u00A0` : ''}
                 </span></p>
                 :
                 <p className={todaycardText}>Нет данных</p>

@@ -1,4 +1,4 @@
-import {format} from "date-fns";
+import {addDays, format} from "date-fns";
 import {createSlice} from "@reduxjs/toolkit";
 
 export interface itemsType {
@@ -14,6 +14,15 @@ type itemsState = {
     stats: itemsType[]
 }
 
+const stats: itemsType = {
+    date: format(new Date(), 'dd/MM/yyyy'),
+    work_sec: 0,
+    pause_sec: 0,
+    isDone: 0,
+    stop_count: 0,
+    tomatoesToday: 0,
+}
+
 const initialState: itemsState = {
     stats: JSON.parse(localStorage.getItem('stats')) || [{
         date: format(new Date(), 'dd/MM/yyyy'),
@@ -23,6 +32,11 @@ const initialState: itemsState = {
         stop_count: 0,
         tomatoesToday: 0,
     }]
+}
+
+
+if ((format(new Date(), 'dd/MM/yyyy') === format(new Date(), 'dd/MM/yyyy') && format(new Date(), 'dd/MM/yyyy') !== format(new Date(), 'dd/MM/yyyy'))) {
+    initialState.stats.push(stats)
 }
 
 export const dateSlice = createSlice({
