@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {SetStateAction, useEffect, useRef, useState} from 'react';
 import ArrowSvg from "../../StatsPage/UpperStats/ArrowSvg";
 import {
     select,
@@ -7,29 +7,48 @@ import {
     selectList
 } from './customselect.scss'
 import ReactDOM from "react-dom";
+import {ChartMode, ChartModes} from "../../StatsPage/UpperStats/UpperStats";
 
 interface ICustomSelect {
-    selected: string,
-    lists: string[]
+    lists: { name: string; value: ChartMode; }[],
+    handleSelectMode?: (selectedMode: ChartMode) => void,
+    selectedChartMode?: ChartMode
 }
 
 function CustomSelect(props: ICustomSelect) {
 
     const {
-        selected,
-        lists
+        lists,
+        handleSelectMode,
+        selectedChartMode
     } = props
 
+
     const [isOpen, setIsOpen] = useState(false)
-    const [selecter, setSelecter] = useState(selected)
+
+    const ref = useRef(null)
+
+    useEffect(() => {
+        function handleClick(event: MouseEvent) {
+            if (event.target instanceof Node && !ref.current?.contains(event.target)) {
+                setIsOpen(false)
+            }
+        }
+
+        document.addEventListener('click', handleClick);
+
+        return () => {
+            document.removeEventListener('click', handleClick);
+        }
+    }, []);
 
     return (
-        <div className={select}>
+        <div className={select} ref={ref}>
             <div className={selectContent} onClick={() => {
                 setIsOpen(!isOpen)
             }}>
                 <p className={selectContentHeader}>
-                    {selecter}
+                    {ChartModes.find(chartMode => chartMode.value === selectedChartMode)?.name}
                 </p>
                 <ArrowSvg rotate={isOpen ? 'down' : 'up'}/>
             </div>
@@ -37,10 +56,10 @@ function CustomSelect(props: ICustomSelect) {
                 <ul className={selectList}>
                     {lists.map((it) =>
                         <li key={Math.round(Math.random() * 100)} onClick={() => {
-                            setSelecter(selecter !== it ? it : selected)
+                            handleSelectMode(it.value)
                             setIsOpen(false)
                         }}>
-                            {selecter !== it ? it : selected}
+                            {it.name}
                         </li>)}
                 </ul>
             }

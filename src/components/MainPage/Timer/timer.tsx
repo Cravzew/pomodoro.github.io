@@ -96,6 +96,7 @@ function Timer() {
     function handlePlus() {
         dispatch(incTimerTomato({id: todo[0].id, tomato: tomato + 1}))
         setTime(time + 60)
+        dispatch(incTomatoesToday())
     }
 
     useEffect(() => {

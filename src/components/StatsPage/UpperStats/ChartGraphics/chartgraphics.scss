@@ -2,3 +2,42 @@
   width: 100%;
   background-color: var(--background-form);
 }
+
+.chartsup {
+  margin-right: 109px;
+  padding-top: 84px;
+}
+
+.chartsdown {
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 165px 11px 56px;
+  background-color: var(--background-info);
+}
+
+.weekday {
+  width: 77px;
+  position: relative;
+  cursor: pointer;
+
+  &--text {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    text-transform: capitalize;
+    transition: color .2s linear;
+    color: var(--placeholder-text);
+  }
+
+  &--line {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    margin-bottom: 11px;
+    bottom: 100%;
+  }
+}

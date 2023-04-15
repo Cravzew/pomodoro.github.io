@@ -9,7 +9,7 @@ export const store = configureStore({
         theme: themeReducer,
         todo: todoReducer,
         data: dataReducer
-    }
+    },
 })
 
 export type RootState = ReturnType<typeof store.getState>

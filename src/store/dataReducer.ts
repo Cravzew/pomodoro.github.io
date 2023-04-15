@@ -1,5 +1,5 @@
-import {addDays, format} from "date-fns";
 import {createSlice} from "@reduxjs/toolkit";
+import moment from "moment";
 
 export interface itemsType {
     date: string,
@@ -14,8 +14,8 @@ type itemsState = {
     stats: itemsType[]
 }
 
-const stats: itemsType = {
-    date: format(new Date(), 'dd/MM/yyyy'),
+const currentDate = {
+    date: moment().format('YYYY-MM-DD'),
     work_sec: 0,
     pause_sec: 0,
     isDone: 0,
@@ -24,19 +24,7 @@ const stats: itemsType = {
 }
 
 const initialState: itemsState = {
-    stats: JSON.parse(localStorage.getItem('stats')) || [{
-        date: format(new Date(), 'dd/MM/yyyy'),
-        work_sec: 0,
-        pause_sec: 0,
-        isDone: 0,
-        stop_count: 0,
-        tomatoesToday: 0,
-    }]
-}
-
-
-if ((format(new Date(), 'dd/MM/yyyy') === format(new Date(), 'dd/MM/yyyy') && format(new Date(), 'dd/MM/yyyy') !== format(new Date(), 'dd/MM/yyyy'))) {
-    initialState.stats.push(stats)
+    stats: JSON.parse(localStorage.getItem('stats')) || [currentDate]
 }
 
 export const dateSlice = createSlice({
@@ -44,31 +32,31 @@ export const dateSlice = createSlice({
     initialState,
     reducers: {
         incWorkSec(state) {
-            state.stats = state.stats.map((item) => item.date === format(new Date(), 'dd/MM/yyyy') ? {
+            state.stats = state.stats.map((item) => item.date === moment().format('YYYY-MM-DD') ? {
                 ...item,
                 work_sec: item.work_sec += 1
             } : item)
         },
         incPauseSec(state) {
-            state.stats = state.stats.map((item) => item.date === format(new Date(), 'dd/MM/yyyy') ? {
+            state.stats = state.stats.map((item) => item.date === moment().format('YYYY-MM-DD') ? {
                 ...item,
                 pause_sec: item.pause_sec += 1
             } : item)
         },
         incComplete(state) {
-            state.stats = state.stats.map((item) => item.date === format(new Date(), 'dd/MM/yyyy') ? {
+            state.stats = state.stats.map((item) => item.date === moment().format('YYYY-MM-DD') ? {
                 ...item,
                 isDone: item.isDone += 1
             } : item)
         },
         incStopCount(state) {
-            state.stats = state.stats.map((item) => item.date === format(new Date(), 'dd/MM/yyyy') ? {
+            state.stats = state.stats.map((item) => item.date === moment().format('YYYY-MM-DD') ? {
                 ...item,
                 stop_count: item.stop_count += 1
             } : item)
         },
         incTomatoesToday(state) {
-            state.stats = state.stats.map((item) => item.date === format(new Date(), 'dd/MM/yyyy') ? {
+            state.stats = state.stats.map((item) => item.date === moment().format('YYYY-MM-DD') ? {
                 ...item,
                 tomatoesToday: item.tomatoesToday += 1
             } : item)
