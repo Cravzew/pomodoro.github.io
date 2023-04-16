@@ -1,6 +1,6 @@
 const workTime = localStorage.getItem('work-time')
 const breakTime = localStorage.getItem('break-time')
 const longBreakTime = localStorage.getItem('long-break-time')
-export const initialTime = Number(workTime) * 60
-export const initialBreak = Number(breakTime) * 60
-export const initialLongBreak = Number(longBreakTime) * 60
+export const initialTime = workTime ? (Number(workTime) * 60) : (25 * 60)
+export const initialBreak = breakTime ? (Number(breakTime) * 60) : (10 * 60)
+export const initialLongBreak = longBreakTime ? (Number(longBreakTime) * 60) : (30 * 60)
