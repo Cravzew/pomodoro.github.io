@@ -35,7 +35,7 @@ function Settings() {
                 </div>
             </button>
             {modalSettings &&
-                <Modal setModal={setModalSettings} title={"Настройки"} footer={
+                <Modal isActive={modalSettings} setModal={setModalSettings} title={"Настройки"} footer={
                     <div className={modalSettingsFooter}>
                         <p>После изменения настроек не забудьте перезагрузить страницу</p>
                         <button className={modalSettingsFooterButton} onClick={handleDefault}>По

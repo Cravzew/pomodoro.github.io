@@ -6,13 +6,14 @@ import {
     modelDialogBody,
     modelDialogClose,
     modelDialogContent,
+    modelDialogFooter,
     modelDialogHeader,
     modelDialogTitle,
-    modelDialogFooter
 } from './modal.scss'
 import ModalCloseSvg from "./ModalCloseSvg";
 
 interface IModalProps {
+    isActive: boolean
     title: string,
     children: React.ReactNode,
     footer: React.ReactNode,
@@ -25,7 +26,8 @@ function Modal(props: IModalProps) {
         title,
         children,
         footer,
-        setModal
+        setModal,
+        isActive
     } = props
 
     function handleClose(e: React.MouseEvent) {

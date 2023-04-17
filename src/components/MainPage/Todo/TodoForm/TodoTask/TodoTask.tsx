@@ -104,7 +104,7 @@ function TodoTask({id, task, tomato}: ITaskProps) {
                 </ul>
             </Dropdown>
             {modalDelete &&
-                <Modal setModal={setModalDelete} title={'Удалить задачу'} footer={
+                <Modal isActive={modalDelete} setModal={setModalDelete} title={'Удалить задачу'} footer={
                     <button id="cancel" className={modalDialogCancel}
                             onClick={() => setModalDelete(false)}>Отмена</button>
                 }>
