@@ -10,7 +10,6 @@ const Theme = () => {
 
     React.useEffect(() => {
         document.documentElement.dataset.theme = theme
-        localStorage.setItem('theme', theme)
     }, [theme])
 
     const handleChange = () => {

@@ -24,13 +24,20 @@ const currentDate = {
 }
 
 const initialState: itemsState = {
-    stats: JSON.parse(localStorage.getItem('stats')) || [currentDate]
+    stats: [currentDate]
 }
 
 export const dateSlice = createSlice({
     name: 'stats',
     initialState,
     reducers: {
+        pushNewAdd(state) {
+            const findStatItem = state.stats.find(item => item.date === moment().format('YYYY-MM-DD'));
+
+            if (!findStatItem) {
+                state.stats.push(currentDate);
+            }
+        },
         incWorkSec(state) {
             state.stats = state.stats.map((item) => item.date === moment().format('YYYY-MM-DD') ? {
                 ...item,
@@ -64,6 +71,6 @@ export const dateSlice = createSlice({
     }
 })
 
-export const {incWorkSec, incPauseSec, incComplete, incStopCount, incTomatoesToday} = dateSlice.actions
+export const {incWorkSec, incPauseSec, incComplete, incStopCount, incTomatoesToday, pushNewAdd} = dateSlice.actions
 
 export default dateSlice.reducer

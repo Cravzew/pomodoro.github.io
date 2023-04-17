@@ -14,7 +14,7 @@ type TodoState = {
 }
 
 const initialState: TodoState = {
-    list: JSON.parse(localStorage.getItem('todos')) || [],
+    list: [],
 }
 
 export const todoSlice = createSlice({

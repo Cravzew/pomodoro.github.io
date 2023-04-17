@@ -27,7 +27,6 @@ function Timer() {
     const [state, setState] = useState('null') //  null / pause / work / break / long-break / pause-break
 
     const todo = useAppSelector(state => state.todo.list)
-    const stats = useAppSelector(state => state.data.stats)
 
     const dispatch = useAppDispatch()
 
@@ -38,10 +37,6 @@ function Timer() {
 
     const minutes = getPadTime(Math.floor(time / 60))
     const seconds = getPadTime(time - Number(minutes) * 60)
-
-    useEffect(() => {
-        localStorage.setItem('stats', JSON.stringify(stats))
-    }, [stats])
 
     function stateWork(): void {
         setState('work')

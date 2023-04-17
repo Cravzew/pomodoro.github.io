@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {tasks, todoForm, todoFormButton, todoFormInput, todoTime} from './todoform.scss'
 import TodoTask from "./TodoTask/TodoTask";
 import {addTodo} from "../../../../store/todoReducer";
@@ -19,10 +19,6 @@ function TodoForm() {
             setUserInput('')
         }
     }
-
-    useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todo))
-    }, [todo])
 
     function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
         setUserInput(event.target.value)
